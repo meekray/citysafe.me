@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-const ContentPage = (props) => {
+const ContentSection = (props) => {
   return (
     <View style = {styles.containerStyle}>
       {props.children}
@@ -13,12 +13,8 @@ const ContentPage = (props) => {
 //containerStyle is a property
 const styles = {
   containerStyle: {
-    flex: 1,
-    paddingTop: 30,
-    paddingBottom: 30,
-    paddingRight: 30,
-    paddingLeft: 30
+    flex: 4
   }
 };
 
-export { ContentPage };
+export { ContentSection };

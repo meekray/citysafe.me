@@ -20,11 +20,11 @@ const Header = (props) => {
 
 const styles = {
   viewStyle: {
-    backgroundColor: '#F8F8F8',
-    justifyContent: 'center',
+    flex: 0.6,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    height: 60,
-    paddingTop: 5,
+    paddingLeft: 30,
     //android specific solution for bottom shadow
     borderBottomColor: '#000',
     borderBottomWidth: 1,
@@ -32,6 +32,7 @@ const styles = {
     position: 'relative'
   },
   textStyle: {
+    fontFamily: 'Helvetica Neue',
     fontSize: 20
   }
 };

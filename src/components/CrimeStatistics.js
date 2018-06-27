@@ -1,28 +1,27 @@
 import React, {Component} from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
-import {Card} from './common'
+import axios from 'axios';
+import {Card} from './common';
 
 class CrimeStatistics extends Component {
   state = {
-    murder: '',
-    assault: '',
-    theft: '',
-    other: ''
+    crimes : []
   };
 
   getStatus(){
 
   }
-  componentWillMount() {
-    
+  componentWillMount(){
+    axios.get('https://data.detroitmi.gov/resource/9i6z-cm98.json?$select=location,%20address,%20offense_category')
+      .then(response => this.setState({
+        crimes: response.data
+      }));
   }
 
-  render(){
+  renderStatistics() {
     const {titleStyle, crimeStatStyle,containerStyle, crimeNumStyle} = styles;
-    const {latitude, longitude} = this.state;
-
-    return(
-      <Card>
+    return (
+      <View style={{flex: 4}}>
         <Text style={titleStyle}>
           CRIMES AROUND ME
         </Text>
@@ -40,11 +39,19 @@ class CrimeStatistics extends Component {
             <Text>THEFTS</Text>
           </View>
           <View style={crimeStatStyle}>
-            <Text style={crimeNumStyle}>12</Text>
+            <Text style={crimeNumStyle}>{this.state.crimes.length}</Text>
             <Text>OTHER</Text>
           </View>
         </View>
-      </Card>
+      </View>
+    );
+  }
+
+  render(){
+    return (
+      <View style={{flex: 4}}>
+        {this.renderStatistics()}
+      </View>
     );
   }
 }

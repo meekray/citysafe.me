@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Dimensions} from 'react-native';
 
-const CardSection = (props) => {
+const MapSection = (props) => {
   return (
     <View style ={[styles.containerStyle, props.style]}>
       {props.children}
@@ -16,8 +16,8 @@ const styles = {
     flexDirection: 'row',
     borderColor: '#ddd',
     position: 'relative',
-    flex: 0.6
+    flex: 3
   }
 };
 
-export {CardSection};
+export {MapSection};
