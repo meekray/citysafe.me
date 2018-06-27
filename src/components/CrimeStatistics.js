@@ -8,14 +8,21 @@ class CrimeStatistics extends Component {
     crimes : []
   };
 
-  getStatus(){
-
-  }
   componentWillMount(){
     axios.get('https://data.detroitmi.gov/resource/9i6z-cm98.json?$select=location,%20address,%20offense_category')
       .then(response => this.setState({
         crimes: response.data
       }));
+  }
+
+  getCrimeInfo(category){
+    const {crimes} = this.state;
+    var count = 0;
+    for(var i = 0; i < crimes.length;i++){
+      if(crimes[i].offense_category.includes(category))
+        count++;
+    }
+    return count;
   }
 
   renderStatistics() {
@@ -27,16 +34,16 @@ class CrimeStatistics extends Component {
         </Text>
         <View style={containerStyle}>
           <View style={crimeStatStyle}>
-            <Text style={crimeNumStyle}>34</Text>
-            <Text>MURDER</Text>
+            <Text style={crimeNumStyle}>{this.getCrimeInfo("DAMAGE")}</Text>
+            <Text>DAMAGE</Text>
           </View>
           <View style={crimeStatStyle}>
-            <Text style={crimeNumStyle}>24</Text>
+            <Text style={crimeNumStyle}>{this.getCrimeInfo("ASSAULT")}</Text>
             <Text>ASSAULTS</Text>
           </View>
           <View style={crimeStatStyle}>
-            <Text style={crimeNumStyle}>5</Text>
-            <Text>THEFTS</Text>
+            <Text style={crimeNumStyle}>{this.getCrimeInfo("ROBBERY")}</Text>
+            <Text>THEFT</Text>
           </View>
           <View style={crimeStatStyle}>
             <Text style={crimeNumStyle}>{this.state.crimes.length}</Text>
