@@ -17,12 +17,7 @@ class App extends Component {
             provider={PROVIDER_GOOGLE}
             style={styles.map}
             customMapStyle={mapStyle}
-            region={{
-              latitude: 42.3313937,
-              longitude: -83.0462747,
-              latitudeDelta: 0.015,
-              longitudeDelta: 0.0121,
-            }}
+            region={hardCodedLocation}
             >
           </MapView>
         </MapSection>
@@ -34,6 +29,14 @@ class App extends Component {
     );
   }
 }
+
+const hardCodedLocation = {
+  latitude: 42.3313937,
+  longitude: -83.0462747,
+  latitudeDelta: 0.015,
+  longitudeDelta: 0.0121
+};
+
 const styles = StyleSheet.create({
   container: { ... StyleSheet.absoluteFillObject },
   map: { ...StyleSheet.absoluteFillObject }

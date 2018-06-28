@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
-import {Card} from './common'
+import {Card} from './common';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class SafeViewScore extends Component {
   state = {
@@ -21,7 +22,7 @@ class SafeViewScore extends Component {
     return(
       <View style={containerStyle}>
         <Text style={safeViewStyle}>{this.state.scoreDisplay}</Text>
-        <Text style={iconStyle}>(icon)</Text>
+        <Icon name='check-circle' size={30} color='white'/>
       </View>
     );
   }
@@ -38,9 +39,6 @@ const styles = {
     color: 'white',
     fontWeight: 'bold',
     fontSize: 60
-  },
-  iconStyle: {
-    fontSize: 10
   }
 };
 

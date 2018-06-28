@@ -9,7 +9,7 @@ class CrimeStatistics extends Component {
   };
 
   componentWillMount(){
-    axios.get('https://data.detroitmi.gov/resource/9i6z-cm98.json?$select=location,%20address,%20offense_category')
+    axios.get('https://data.detroitmi.gov/resource/9i6z-cm98.json?$select=location,%20offense_category')
       .then(response => this.setState({
         crimes: response.data
       }));
@@ -25,30 +25,35 @@ class CrimeStatistics extends Component {
     return count;
   }
 
+  renderStat(word){
+    const {titleStyle, crimeStatStyle,containerStyle, crimeNumStyle} = styles;
+    return (
+      <View style={crimeStatStyle}>
+        <Text style={crimeNumStyle}>{this.getCrimeInfo(word)}</Text>
+        <Text>{word}</Text>
+      </View>
+    );
+  }
+
+  crimesTitle(){
+    const {titleStyle, crimeStatStyle,containerStyle, crimeNumStyle} = styles;
+    return(
+      <Text style={titleStyle}>
+        CRIMES AROUND ME
+      </Text>
+    );
+  }
+
   renderStatistics() {
     const {titleStyle, crimeStatStyle,containerStyle, crimeNumStyle} = styles;
     return (
       <View style={{flex: 4}}>
-        <Text style={titleStyle}>
-          CRIMES AROUND ME
-        </Text>
+        {this.crimesTitle()}
         <View style={containerStyle}>
-          <View style={crimeStatStyle}>
-            <Text style={crimeNumStyle}>{this.getCrimeInfo("DAMAGE")}</Text>
-            <Text>DAMAGE</Text>
-          </View>
-          <View style={crimeStatStyle}>
-            <Text style={crimeNumStyle}>{this.getCrimeInfo("ASSAULT")}</Text>
-            <Text>ASSAULTS</Text>
-          </View>
-          <View style={crimeStatStyle}>
-            <Text style={crimeNumStyle}>{this.getCrimeInfo("ROBBERY")}</Text>
-            <Text>THEFT</Text>
-          </View>
-          <View style={crimeStatStyle}>
-            <Text style={crimeNumStyle}>{this.state.crimes.length}</Text>
-            <Text>OTHER</Text>
-          </View>
+          {this.renderStat("DAMAGE")}
+          {this.renderStat("ASSAULT")}
+          {this.renderStat("ROBBERY")}
+          {this.renderStat("DRUGS")}
         </View>
       </View>
     );
