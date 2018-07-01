@@ -1,22 +1,16 @@
-import React, {Component} from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import {Card} from './common';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import SnapSlider from 'react-native-snap-slider';
-
+import { radiusChanged } from './actions/RadiusActions';
 
 
 class LocationButtons extends Component {
   state = {
     refreshPressed: false
   };
-
-  getNewCoords(){
-
-  }
-  componentWillMount() {
-
-  }
 
   onRadiusPress() {
     const { refreshPressed } = this.state;
@@ -27,11 +21,18 @@ class LocationButtons extends Component {
 
   }
 
+  slidingComplete(itemSelected){
+    const value = radiusOptions[itemSelected].value;
+    this.props.radiusChanged({newSize: value});
+    this.onRadiusPress();
+  }
+
   renderButton(name, icon, buttonFunction) {
     const {textButtonStyle, groupIconAndText} = styles;
     return(
       <View>
         <TouchableOpacity
+          ref="slider"
           style={groupIconAndText}
           onPress={() => buttonFunction()}>
             <Icon name={icon} size={25} color='#329E87'/>
@@ -42,23 +43,19 @@ class LocationButtons extends Component {
   }
 
   renderSlider(){
-    console.log("rendering again" + this.state.refreshPressed);
     const { sliderStyle } = styles;
     if(this.state.refreshPressed){
       return(
           <View style={sliderStyle}>
             <SnapSlider
-              items={[
-                  {value: 100, label: '100m'},
-                  {value: 250, label: '250m'},
-                  {value: 500, label: '500m'}
-              ]}
+              items={radiusOptions}
               defaultItem={1}
               labelPosition="bottom"
+              onSlidingComplete={this.slidingComplete.bind(this)}
             />
           </View>
       );
-  }
+    }
     else {
         return(
           <View></View>
@@ -75,9 +72,7 @@ class LocationButtons extends Component {
           {this.renderButton("REFRESH LOCATION", "refresh", this.onRefreshPress.bind(this))}
           {this.renderButton("CHANGE RADIUS", "arrow-up", this.onRadiusPress.bind(this))}
         </View>
-        <View>
-          {this.renderSlider()}
-        </View>
+        {this.renderSlider()}
       </View>
     );
   }
@@ -107,4 +102,10 @@ const styles = {
   }
 };
 
-export {LocationButtons};
+const radiusOptions = [
+    {value: 100, label: '100m'},
+    {value: 250, label: '250m'},
+    {value: 500, label: '500m'}
+];
+
+export default connect(null, {radiusChanged})(LocationButtons);

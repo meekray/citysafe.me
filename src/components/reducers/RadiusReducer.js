@@ -9,6 +9,11 @@ const INITIAL_STATE = {
 */
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case 'RADIUS_CHANGED':
+      return {
+        ...state,
+        radius: action.payload
+      }
     default:
       return state;
   }

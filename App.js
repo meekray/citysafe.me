@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
-import mapStyle from './src/styles/mapstyle.json';
-import {ContentSection, Card, MapSection, Header} from './src/components/common';
-import {LocationButtons, CrimeStatistics, SafeViewScore} from './src/components';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import mapStyle from './src/styles/mapstyle.json';
 import reducers from './src/components/reducers'
+
+import {ContentSection, Card, MapSection, Header} from './src/components/common';
+import { CrimeStatistics, SafeViewScore} from './src/components';
+import LocationButtons from './src/components/LocationButtons';
 //https://itnext.io/install-react-native-maps-with-gradle-3-on-android-44f91a70a395
 
 class App extends Component {
