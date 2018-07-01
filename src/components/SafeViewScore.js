@@ -22,23 +22,24 @@ class SafeViewScore extends Component {
     return(
       <View style={containerStyle}>
         <Text style={safeViewStyle}>{this.state.scoreDisplay}</Text>
-        <Icon name='check-circle' size={30} color='white'/>
+        <Icon name='check-circle' size={40} color='white'/>
       </View>
     );
   }
 }
 const styles = {
   containerStyle: {
-    flex: 2,
+    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
-    backgroundColor: '#6FCF97'
+    backgroundColor: '#329E87',
+    elevation: 1
   },
   safeViewStyle: {
     color: 'white',
-    fontWeight: 'bold',
-    fontSize: 60
+    fontSize: 60,
+    fontFamily: 'Lato-Regular'
   }
 };
 

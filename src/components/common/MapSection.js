@@ -3,7 +3,7 @@ import { View, Dimensions} from 'react-native';
 
 const MapSection = (props) => {
   return (
-    <View style ={[styles.containerStyle, props.style]}>
+    <View style ={styles.containerStyle}>
       {props.children}
     </View>
   );
@@ -11,12 +11,8 @@ const MapSection = (props) => {
 
 const styles = {
   containerStyle: {
-    backgroundColor: 'white',
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
-    borderColor: '#ddd',
-    position: 'relative',
-    flex: 3
+    flex: 3,
+    padding: 30
   }
 };
 

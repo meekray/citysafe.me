@@ -11,7 +11,6 @@ class App extends Component {
   render () {
     return (
       <Card>
-        <Header headerText="citysafe.me"/>
         <MapSection>
           <MapView
             provider={PROVIDER_GOOGLE}
@@ -22,6 +21,7 @@ class App extends Component {
           </MapView>
         </MapSection>
         <ContentSection>
+          <CityLocation/>
           <SafeViewScore/>
           <CrimeStatistics/>
         </ContentSection>

@@ -13,7 +13,8 @@ const Card = (props) => {
 //containerStyle is a property
 const styles = {
   containerStyle: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#F5F5F7'
   }
 };
 

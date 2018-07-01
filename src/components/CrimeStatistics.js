@@ -26,32 +26,24 @@ class CrimeStatistics extends Component {
   }
 
   renderStat(word){
-    const {titleStyle, crimeStatStyle,containerStyle, crimeNumStyle} = styles;
+    const {crimeStatStyle, crimeNumStyle, crimeNameStyle} = styles;
     return (
       <View style={crimeStatStyle}>
         <Text style={crimeNumStyle}>{this.getCrimeInfo(word)}</Text>
-        <Text>{word}</Text>
+        <Text style={crimeNameStyle}>{word}</Text>
       </View>
     );
   }
 
-  crimesTitle(){
-    const {titleStyle, crimeStatStyle,containerStyle, crimeNumStyle} = styles;
-    return(
-      <Text style={titleStyle}>
-        CRIMES AROUND ME
-      </Text>
-    );
-  }
-
   renderStatistics() {
-    const {titleStyle, crimeStatStyle,containerStyle, crimeNumStyle} = styles;
+    const { containerStyle } = styles;
     return (
-      <View style={{flex: 4}}>
-        {this.crimesTitle()}
+      <View style={{flex: 2}}>
         <View style={containerStyle}>
           {this.renderStat("DAMAGE")}
           {this.renderStat("ASSAULT")}
+        </View>
+        <View style={containerStyle}>
           {this.renderStat("ROBBERY")}
           {this.renderStat("DRUGS")}
         </View>
@@ -60,35 +52,36 @@ class CrimeStatistics extends Component {
   }
 
   render(){
-    return (
-      <View style={{flex: 4}}>
-        {this.renderStatistics()}
-      </View>
-    );
+    return this.renderStatistics();
   }
 }
 const styles = {
-  titleStyle: {
-    fontFamily: "Roboto",
-    fontWeight: "bold",
-    color: "#4F4F4F",
-    fontSize: 24
-  },
   containerStyle: {
-    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center'
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    flex: 1
   },
   crimeStatStyle: {
-    flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+
+    backgroundColor: 'white',
+    width: 100,
+
+    borderRadius: 3,
+    elevation: 0.5
   },
   crimeNumStyle: {
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontFamily: 'Lato-Light',
+    color: '#329E87'
+  },
+  crimeNameStyle: {
+    fontFamily: 'Montserrat-SemiBold',
+    color: '#329E87'
   }
 };
 
