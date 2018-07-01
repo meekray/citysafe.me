@@ -65,13 +65,13 @@ const styles = {
   crimeStatStyle: {
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    alignItems: 'center',
 
-    backgroundColor: 'white',
+    backgroundColor: '#FAFAFA',
     width: 100,
 
-    borderRadius: 3,
-    elevation: 0.5
+    borderRadius: 2,
+    elevation: 1
   },
   crimeNumStyle: {
     fontSize: 20,
