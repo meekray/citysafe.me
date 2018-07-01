@@ -3,29 +3,33 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import mapStyle from './src/styles/mapstyle.json';
 import {ContentSection, Card, MapSection, Header} from './src/components/common';
-import {CityLocation, CrimeStatistics, SafeViewScore} from './src/components';
-
+import {LocationButtons, CrimeStatistics, SafeViewScore} from './src/components';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducers from './src/components/reducers'
 //https://itnext.io/install-react-native-maps-with-gradle-3-on-android-44f91a70a395
 
 class App extends Component {
   render () {
     return (
-      <Card>
-        <MapSection>
-          <MapView
-            provider={PROVIDER_GOOGLE}
-            style={styles.map}
-            customMapStyle={mapStyle}
-            region={hardCodedLocation}
-            >
-          </MapView>
-        </MapSection>
-        <ContentSection>
-          <CityLocation/>
-          <SafeViewScore/>
-          <CrimeStatistics/>
-        </ContentSection>
-      </Card>
+      <Provider store={createStore(reducers)}>
+        <Card>
+          <MapSection>
+            <MapView
+              provider={PROVIDER_GOOGLE}
+              style={styles.map}
+              customMapStyle={mapStyle}
+              region={hardCodedLocation}
+              >
+            </MapView>
+          </MapSection>
+          <ContentSection>
+            <LocationButtons/>
+            <SafeViewScore/>
+            <CrimeStatistics/>
+          </ContentSection>
+        </Card>
+      </Provider>
     );
   }
 }
