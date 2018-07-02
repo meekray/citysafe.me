@@ -2,16 +2,19 @@ import React, {Component} from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import axios from 'axios';
 import {Card} from './common';
+import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
 
 class CrimeStatistics extends Component {
   state = {
-    crimes : []
+    crimes : [],
+    isLoaded: false
   };
 
   componentWillMount(){
     axios.get('https://data.detroitmi.gov/resource/9i6z-cm98.json?$select=location,%20offense_category')
       .then(response => this.setState({
-        crimes: response.data
+        crimes: response.data,
+        isLoaded: true
       }));
   }
 
@@ -28,10 +31,12 @@ class CrimeStatistics extends Component {
   renderStat(word){
     const {crimeStatStyle, crimeNumStyle, crimeNameStyle} = styles;
     return (
-      <View style={crimeStatStyle}>
-        <Text style={crimeNumStyle}>{this.getCrimeInfo(word)}</Text>
-        <Text style={crimeNameStyle}>{word}</Text>
-      </View>
+        <View style={crimeStatStyle}>
+          <ShimmerPlaceHolder autoRun={true} visible={this.state.isLoaded} height={50}>
+            <Text style={crimeNumStyle}>{this.getCrimeInfo(word)}</Text>
+            <Text style={crimeNameStyle}>{word}</Text>
+          </ShimmerPlaceHolder>
+        </View>
     );
   }
 
@@ -69,7 +74,7 @@ const styles = {
 
     backgroundColor: '#FAFAFA',
     width: 100,
-
+    height: 50,
     borderRadius: 2,
     elevation: 1
   },

@@ -11,6 +11,7 @@
     "evil-icons": "^1.10.1",
     "react": "16.3.1",
     "react-native": "0.55.4",
+    "react-native-linear-gradient": "^2.4.0",
     "react-native-maps": "^0.21.0",
     "react-native-snap-slider": "^0.3.0",
     "react-native-vector-icons": "^4.6.0",
