@@ -1,25 +1,15 @@
 import React, {Component} from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import {Card} from './common';
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
+import {loadedFetch, radiusChanged, crimesFetch} from './actions';
 
 class CrimeStatistics extends Component {
-  state = {
-    crimes : [],
-    isLoaded: false
-  };
-
-  componentWillMount(){
-    axios.get('https://data.detroitmi.gov/resource/9i6z-cm98.json?$select=location,%20offense_category')
-      .then(response => this.setState({
-        crimes: response.data,
-        isLoaded: true
-      }));
-  }
-
+  
   getCrimeInfo(category){
-    const {crimes} = this.state;
+    const {crimes} = this.props;
     var count = 0;
     for(var i = 0; i < crimes.length;i++){
       if(crimes[i].offense_category.includes(category))
@@ -30,9 +20,10 @@ class CrimeStatistics extends Component {
 
   renderStat(word){
     const {crimeStatStyle, crimeNumStyle, crimeNameStyle} = styles;
+
     return (
         <View style={crimeStatStyle}>
-          <ShimmerPlaceHolder autoRun={true} visible={this.state.isLoaded} height={50}>
+          <ShimmerPlaceHolder autoRun={true} visible={this.props.isLoaded} height={50}>
             <Text style={crimeNumStyle}>{this.getCrimeInfo(word)}</Text>
             <Text style={crimeNameStyle}>{word}</Text>
           </ShimmerPlaceHolder>
@@ -41,6 +32,7 @@ class CrimeStatistics extends Component {
   }
 
   renderStatistics() {
+    this.props.crimesFetch();
     const { containerStyle } = styles;
     return (
       <View style={{flex: 2}}>
@@ -90,4 +82,8 @@ const styles = {
   }
 };
 
-export {CrimeStatistics};
+const mapStateToProps = state => {
+  const { radius, isLoaded, crimes } = state.region;
+  return { radius, isLoaded, crimes};
+};
+export default connect(mapStateToProps, {loadedFetch, radiusChanged, crimesFetch})(CrimeStatistics);

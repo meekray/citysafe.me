@@ -22,8 +22,8 @@ class LocationButtons extends Component {
   }
 
   slidingComplete(itemSelected){
-    const value = radiusOptions[itemSelected].value;
-    this.props.radiusChanged({newSize: value});
+    const newSize = radiusOptions[itemSelected].value;
+    this.props.radiusChanged(newSize);
     this.onRadiusPress();
   }
 
@@ -70,7 +70,7 @@ class LocationButtons extends Component {
       <View>
         <View style={rowStyle}>
           {this.renderButton("REFRESH LOCATION", "refresh", this.onRefreshPress.bind(this))}
-          {this.renderButton("CHANGE RADIUS", "arrow-up", this.onRadiusPress.bind(this))}
+          {this.renderButton("CRIME RADIUS", "arrow-up", this.onRadiusPress.bind(this))}
         </View>
         {this.renderSlider()}
       </View>

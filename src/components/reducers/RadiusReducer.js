@@ -1,6 +1,9 @@
 const INITIAL_STATE = {
-  radius: 500
+  crimes: [],
+  radius: 250,
+  isLoaded: false
 };
+//TODO set up initial state
 /*
   --> Produces a piece of [application] state [auth]
   1) Initial state can't be undefined.
@@ -13,6 +16,17 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         radius: action.payload
+      }
+    case 'LOADED_FETCH_SUCCESS':
+      return {
+        ...state,
+        isLoaded: action.payload
+      }
+    case 'CRIMES_FETCH_SUCCESS':
+      return {
+        ...state,
+        isLoaded: true,
+        crimes: action.payload
       }
     default:
       return state;

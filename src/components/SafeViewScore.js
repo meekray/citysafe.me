@@ -34,7 +34,7 @@ const styles = {
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: '#329E87',
-    elevation: 1
+    elevation: 3
   },
   safeViewStyle: {
     color: 'white',

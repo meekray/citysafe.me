@@ -11,6 +11,6 @@ import RadiusReducer from './RadiusReducer'
 export default combineReducers(
   {
     score: ScoreReducer,
-    radius: RadiusReducer
+    region: RadiusReducer
   }
 );
