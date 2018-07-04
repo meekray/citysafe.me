@@ -16,6 +16,8 @@ class SafeViewScore extends Component {
   }
 
   render(){
+    console.log("Safeview");
+
     const {safeViewStyle, iconStyle, containerStyle} = styles;
     const {scoreDisplay} = this.state;
 

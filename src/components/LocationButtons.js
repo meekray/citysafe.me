@@ -4,17 +4,24 @@ import { connect } from 'react-redux';
 import {Card} from './common';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import SnapSlider from 'react-native-snap-slider';
-import { radiusChanged } from './actions/RadiusActions';
+import { radiusChanged, crimesFetch } from './actions/RadiusActions';
 
 
 class LocationButtons extends Component {
   state = {
-    refreshPressed: false
+    refreshPressed: false,
+    position: 1
   };
 
-  onRadiusPress() {
+  componentWillMount() {
+
+  }
+
+  onRadiusPress(itemSelected) {
     const { refreshPressed } = this.state;
-    this.setState({refreshPressed: !refreshPressed})
+    this.setState({
+      refreshPressed: !refreshPressed
+    });
   }
 
   onRefreshPress(){
@@ -22,9 +29,15 @@ class LocationButtons extends Component {
   }
 
   slidingComplete(itemSelected){
+    const {refreshPressed, position } = this.state;
     const newSize = radiusOptions[itemSelected].value;
     this.props.radiusChanged(newSize);
-    this.onRadiusPress();
+    this.props.crimesFetch(newSize);
+    this.onRadiusPress(itemSelected);
+    this.setState({
+      refreshPressed: !refreshPressed,
+      position: itemSelected
+    });
   }
 
   renderButton(name, icon, buttonFunction) {
@@ -49,7 +62,7 @@ class LocationButtons extends Component {
           <View style={sliderStyle}>
             <SnapSlider
               items={radiusOptions}
-              defaultItem={1}
+              defaultItem={this.state.position}
               labelPosition="bottom"
               onSlidingComplete={this.slidingComplete.bind(this)}
             />
@@ -63,6 +76,8 @@ class LocationButtons extends Component {
     }
   }
   render(){
+    console.log("LocationButtons");
+
     const {titleStyle, rowStyle, textButtonStyle} = styles;
     const {latitude, longitude} = this.state;
 
@@ -108,4 +123,4 @@ const radiusOptions = [
     {value: 500, label: '500m'}
 ];
 
-export default connect(null, {radiusChanged})(LocationButtons);
+export default connect(null, {radiusChanged, crimesFetch})(LocationButtons);

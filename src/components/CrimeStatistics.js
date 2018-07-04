@@ -4,10 +4,14 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import {Card} from './common';
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
-import {loadedFetch, radiusChanged, crimesFetch} from './actions';
+import { crimesFetch } from './actions';
 
 class CrimeStatistics extends Component {
-  
+
+  componentWillMount () {
+    this.props.crimesFetch(this.props.radius);
+  }
+
   getCrimeInfo(category){
     const {crimes} = this.props;
     var count = 0;
@@ -32,7 +36,6 @@ class CrimeStatistics extends Component {
   }
 
   renderStatistics() {
-    this.props.crimesFetch();
     const { containerStyle } = styles;
     return (
       <View style={{flex: 2}}>
@@ -49,6 +52,7 @@ class CrimeStatistics extends Component {
   }
 
   render(){
+    console.log("CrimeStatistics");
     return this.renderStatistics();
   }
 }
@@ -86,4 +90,4 @@ const mapStateToProps = state => {
   const { radius, isLoaded, crimes } = state.region;
   return { radius, isLoaded, crimes};
 };
-export default connect(mapStateToProps, {loadedFetch, radiusChanged, crimesFetch})(CrimeStatistics);
+export default connect(mapStateToProps, { crimesFetch })(CrimeStatistics);

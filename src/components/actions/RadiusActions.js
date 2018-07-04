@@ -13,16 +13,15 @@ export const loadedFetch = (isLoaded) => {
     payload: !isLoaded
   };
 };
-export const crimesFetch = ( radius = 500 ) => {
+
+export const crimesFetch = (radius) => {
   return ( dispatch ) => {
     axios.get(`https://data.detroitmi.gov/resource/9i6z-cm98.json?$where=within_circle(location,42.3560102,-83.07087059999998,${radius})&$limit=5000&$select=location,offense_category`)
     .then(response => {
-      dispatch({ type: "CRIMES_FETCH_SUCCESS", payload: response.data});
+      dispatch({ type: "CRIMES_FETCH_SUCCESS", payload: response.data})
     })
     .catch(error => {
       console.log(error)
-    })
+    });
   };
 };
-
--->TODO LEARN WHEN TO USE REDUX THUNK
