@@ -1,5 +1,6 @@
+import { crimeOptions, generateScore } from '../Constants';
+
 const INITIAL_STATE = {
-  crimes: [],
   radius: 250,
   isLoaded: false
 };
@@ -23,11 +24,28 @@ export default (state = INITIAL_STATE, action) => {
         isLoaded: action.payload
       }
     case 'CRIMES_FETCH_SUCCESS':
+    {
+      var scores = [0, 0, 0, 0];
+
+      for(var i = 0; i < crimeOptions.length; i++){
+        for(var j = 0; j < action.payload.length; j++){
+          if(action.payload[j].offense_category.includes(crimeOptions[i].crimeType)){
+            scores[i]++;
+          }
+        }
+      }
+      var totalScore = generateScore(scores);
+      
       return {
         ...state,
         isLoaded: true,
-        crimes: action.payload
+        DAMAGE: scores[0],
+        ASSAULT: scores[1],
+        ROBBERY: scores[2],
+        DRUGS: scores[3],
+        totalScore: totalScore
       }
+    }
     default:
       return state;
   }

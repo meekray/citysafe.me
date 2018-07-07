@@ -4,13 +4,12 @@ import { connect } from 'react-redux';
 import {Card} from './common';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import SnapSlider from 'react-native-snap-slider';
-import { radiusChanged, crimesFetch } from './actions/RadiusActions';
-
+import { radiusChanged, crimesFetch } from './actions'
 
 class LocationButtons extends Component {
   state = {
     refreshPressed: false,
-    position: 1
+    position: 2
   };
 
   componentWillMount() {
@@ -25,7 +24,8 @@ class LocationButtons extends Component {
   }
 
   onRefreshPress(){
-
+    //this.props.crimesFetch(500);
+    console.log("I Complete");
   }
 
   slidingComplete(itemSelected){

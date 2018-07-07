@@ -7,7 +7,7 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import mapStyle from './src/styles/mapstyle.json';
 import reducers from './src/components/reducers'
 import {ContentSection, Card, MapSection, Header} from './src/components/common';
-import { SafeViewScore } from './src/components';
+import SafeViewScore from './src/components/SafeViewScore';
 import LocationButtons from './src/components/LocationButtons';
 import CrimeStatistics from './src/components/CrimeStatistics';
 //https://itnext.io/install-react-native-maps-with-gradle-3-on-android-44f91a70a395

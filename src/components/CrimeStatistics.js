@@ -9,26 +9,16 @@ import { crimesFetch } from './actions';
 class CrimeStatistics extends Component {
 
   componentWillMount () {
-    this.props.crimesFetch(this.props.radius);
-  }
-
-  getCrimeInfo(category){
-    const {crimes} = this.props;
-    var count = 0;
-    for(var i = 0; i < crimes.length;i++){
-      if(crimes[i].offense_category.includes(category))
-        count++;
-    }
-    return count;
+    this.props.crimesFetch(500);
   }
 
   renderStat(word){
     const {crimeStatStyle, crimeNumStyle, crimeNameStyle} = styles;
-
+    const statistic = this.props[word];
     return (
         <View style={crimeStatStyle}>
           <ShimmerPlaceHolder autoRun={true} visible={this.props.isLoaded} height={50}>
-            <Text style={crimeNumStyle}>{this.getCrimeInfo(word)}</Text>
+            <Text style={crimeNumStyle}>{statistic}</Text>
             <Text style={crimeNameStyle}>{word}</Text>
           </ShimmerPlaceHolder>
         </View>
@@ -86,8 +76,10 @@ const styles = {
   }
 };
 
+//https://stackoverflow.com/questions/40386128/how-does-a-redux-connected-component-know-when-to-re-render
+
 const mapStateToProps = state => {
-  const { radius, isLoaded, crimes } = state.region;
-  return { radius, isLoaded, crimes};
+  const { isLoaded, DAMAGE, ASSAULT, ROBBERY, DRUGS } = state.region;
+  return { isLoaded, DAMAGE, ASSAULT, ROBBERY, DRUGS};
 };
 export default connect(mapStateToProps, { crimesFetch })(CrimeStatistics);

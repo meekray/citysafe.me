@@ -1,14 +1,15 @@
 const INITIAL_STATE = {
-
+  totalScore: ''
 };
-/*
-  --> Produces a piece of [application] state [auth]
-  1) Initial state can't be undefined.
-  2) Handles the logic for new email that is coming from the action
-     -action will be whatever the user has typed in
-*/
+
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case "SCORE_CALCULATED":
+    console.log(action.payload);
+      return {
+        ...state,
+        totalScore: action.payload
+      };
     default:
       return state;
   }
