@@ -35,7 +35,6 @@ export default (state = INITIAL_STATE, action) => {
         }
       }
       var totalScore = generateScore(scores);
-      
       return {
         ...state,
         isLoaded: true,

@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import {Card} from './common';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import SnapSlider from 'react-native-snap-slider';
-import { radiusChanged, crimesFetch } from './actions'
+import { radiusChanged, crimesFetch } from './actions';
+import { DisplayStyles, statisticStyles } from '../styles/DisplayStyles';
 
 class LocationButtons extends Component {
   state = {
@@ -24,8 +25,7 @@ class LocationButtons extends Component {
   }
 
   onRefreshPress(){
-    //this.props.crimesFetch(500);
-    console.log("I Complete");
+
   }
 
   slidingComplete(itemSelected){
@@ -42,13 +42,14 @@ class LocationButtons extends Component {
 
   renderButton(name, icon, buttonFunction) {
     const {textButtonStyle, groupIconAndText} = styles;
+
     return(
       <View>
         <TouchableOpacity
           ref="slider"
           style={groupIconAndText}
           onPress={() => buttonFunction()}>
-            <Icon name={icon} size={25} color='#329E87'/>
+            <Icon name={icon} size={25} color='grey'/>
             <Text style={textButtonStyle}>{name}</Text>
         </TouchableOpacity>
       </View>
@@ -56,12 +57,17 @@ class LocationButtons extends Component {
   }
 
   renderSlider(){
+    console.log(this.props.totalScore);
     const { sliderStyle } = styles;
+    const dynStyle = statisticStyles[this.props.totalScore];
+
     if(this.state.refreshPressed){
+
       return(
           <View style={sliderStyle}>
             <SnapSlider
               items={radiusOptions}
+        
               defaultItem={this.state.position}
               labelPosition="bottom"
               onSlidingComplete={this.slidingComplete.bind(this)}
@@ -79,7 +85,6 @@ class LocationButtons extends Component {
     console.log("LocationButtons");
 
     const {titleStyle, rowStyle, textButtonStyle} = styles;
-    const {latitude, longitude} = this.state;
 
     return(
       <View>
@@ -123,4 +128,9 @@ const radiusOptions = [
     {value: 500, label: '500m'}
 ];
 
-export default connect(null, {radiusChanged, crimesFetch})(LocationButtons);
+const mapStateToProps = state => {
+  const { totalScore } = state.region;
+  return { totalScore };
+};
+
+export default connect(mapStateToProps, {radiusChanged, crimesFetch})(LocationButtons);

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import {Card} from './common';
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
 import { crimesFetch } from './actions';
+import { statisticStyles } from '../styles/DisplayStyles';
 
 class CrimeStatistics extends Component {
 
@@ -15,11 +16,13 @@ class CrimeStatistics extends Component {
   renderStat(word){
     const {crimeStatStyle, crimeNumStyle, crimeNameStyle} = styles;
     const statistic = this.props[word];
+    const dynStyle = statisticStyles[this.props.totalScore];
+
     return (
         <View style={crimeStatStyle}>
           <ShimmerPlaceHolder autoRun={true} visible={this.props.isLoaded} height={50}>
-            <Text style={crimeNumStyle}>{statistic}</Text>
-            <Text style={crimeNameStyle}>{word}</Text>
+            <Text style={[crimeNumStyle, dynStyle]}>{statistic}</Text>
+            <Text style={[crimeNameStyle, dynStyle]}>{word}</Text>
           </ShimmerPlaceHolder>
         </View>
     );
@@ -79,7 +82,7 @@ const styles = {
 //https://stackoverflow.com/questions/40386128/how-does-a-redux-connected-component-know-when-to-re-render
 
 const mapStateToProps = state => {
-  const { isLoaded, DAMAGE, ASSAULT, ROBBERY, DRUGS } = state.region;
-  return { isLoaded, DAMAGE, ASSAULT, ROBBERY, DRUGS};
+  const { isLoaded, DAMAGE, ASSAULT, ROBBERY, DRUGS, totalScore } = state.region;
+  return { isLoaded, DAMAGE, ASSAULT, ROBBERY, DRUGS, totalScore};
 };
 export default connect(mapStateToProps, { crimesFetch })(CrimeStatistics);

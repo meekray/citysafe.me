@@ -5,7 +5,6 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "SCORE_CALCULATED":
-    console.log(action.payload);
       return {
         ...state,
         totalScore: action.payload

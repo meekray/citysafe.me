@@ -5,20 +5,15 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import { crimesFetch } from './actions';
 import { crimeOptions } from './Constants';
+import { DisplayStyles} from '../styles/DisplayStyles';
 
 class SafeViewScore extends Component {
-  state = {
-    totalScore: 0
-  };
-
-  componentWillMount() {
-  }
-
   render(){
     console.log("SafeViewScore");
+    const dynStyle = DisplayStyles[this.props.totalScore];
     const {safeViewStyle, iconStyle, containerStyle} = styles;
     return(
-      <View style={containerStyle}>
+      <View style={[containerStyle, dynStyle]}>
         <Text style={safeViewStyle}>{this.props.totalScore}</Text>
         <Icon name='check-circle' size={40} color='white'/>
       </View>
@@ -31,8 +26,8 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    backgroundColor: '#329E87',
-    elevation: 3
+    elevation: 3,
+    backgroundColor: 'white'
   },
   safeViewStyle: {
     color: 'white',
@@ -43,8 +38,6 @@ const styles = {
 
 const mapStateToProps = state => {
   const { totalScore } = state.region;
-
   return { totalScore };
-
 }
 export default connect (mapStateToProps, {crimesFetch})(SafeViewScore);
