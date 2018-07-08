@@ -5,17 +5,13 @@ import {Card} from './common';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import SnapSlider from 'react-native-snap-slider';
 import { radiusChanged, crimesFetch } from './actions';
-import { DisplayStyles, statisticStyles } from '../styles/DisplayStyles';
+import { DisplayStyles, statisticStyles, SliderStyle } from '../styles/DisplayStyles';
 
 class LocationButtons extends Component {
   state = {
     refreshPressed: false,
     position: 2
   };
-
-  componentWillMount() {
-
-  }
 
   onRadiusPress(itemSelected) {
     const { refreshPressed } = this.state;
@@ -57,18 +53,18 @@ class LocationButtons extends Component {
   }
 
   renderSlider(){
-    console.log(this.props.totalScore);
     const { sliderStyle } = styles;
-    const dynStyle = statisticStyles[this.props.totalScore];
-
+    const dynStyle = SliderStyle[this.props.totalScore];
     if(this.state.refreshPressed){
-
+      console.log(SliderStyle);
+      console.log(SliderStyle[this.props.totalScore]);
       return(
           <View style={sliderStyle}>
             <SnapSlider
               items={radiusOptions}
-        
+              minimumTrackTintColor={dynStyle.minimumTrackTintColor}
               defaultItem={this.state.position}
+              thumbTintColor={dynStyle.thumbTintColor}
               labelPosition="bottom"
               onSlidingComplete={this.slidingComplete.bind(this)}
             />

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {Card} from './common';
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
 import { crimesFetch } from './actions';
-import { statisticStyles } from '../styles/DisplayStyles';
+import { StatisticStyles } from '../styles/DisplayStyles';
 
 class CrimeStatistics extends Component {
 
@@ -16,7 +16,7 @@ class CrimeStatistics extends Component {
   renderStat(word){
     const {crimeStatStyle, crimeNumStyle, crimeNameStyle} = styles;
     const statistic = this.props[word];
-    const dynStyle = statisticStyles[this.props.totalScore];
+    const dynStyle = StatisticStyles[this.props.totalScore];
 
     return (
         <View style={crimeStatStyle}>
@@ -70,12 +70,10 @@ const styles = {
   crimeNumStyle: {
     fontSize: 20,
     fontWeight: 'bold',
-    fontFamily: 'Lato-Light',
-    color: '#329E87'
+    fontFamily: 'Lato-Light'
   },
   crimeNameStyle: {
-    fontFamily: 'Montserrat-SemiBold',
-    color: '#329E87'
+    fontFamily: 'Montserrat-SemiBold'
   }
 };
 
