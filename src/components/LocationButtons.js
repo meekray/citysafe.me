@@ -56,8 +56,6 @@ class LocationButtons extends Component {
     const { sliderStyle } = styles;
     const dynStyle = SliderStyle[this.props.totalScore];
     if(this.state.refreshPressed){
-      console.log(SliderStyle);
-      console.log(SliderStyle[this.props.totalScore]);
       return(
           <View style={sliderStyle}>
             <SnapSlider

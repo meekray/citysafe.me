@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import ReduxThunk from 'redux-thunk';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import mapStyle from '../styles/mapstyle.json';
 import reducers from './reducers'
 import {ContentSection, Card, MapSection, Header} from './common';
@@ -46,6 +43,7 @@ class Router extends Component {
     console.log(location);
     return (
       <Card>
+                <LocationButtons/>
         <MapSection>
           <MapView
             provider={PROVIDER_GOOGLE}
@@ -56,7 +54,6 @@ class Router extends Component {
           </MapView>
         </MapSection>
         <ContentSection>
-          <LocationButtons/>
           <SafeViewScore/>
           <CrimeStatistics/>
         </ContentSection>

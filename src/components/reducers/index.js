@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import ScoreReducer from './ScoreReducer';
-import RadiusReducer from './RadiusReducer'
+import RadiusReducer from './RadiusReducer';
+import LocationReducer from './LocationReducer';
 /*
-  1) The 'auth' piece of state is produced by
+  1) The 'region' piece of state is produced by
      the AuthReducer
   2) combineReducers creates a piece of state for each reducer, which then contains
      that reducers' state. state's state
@@ -10,7 +10,7 @@ import RadiusReducer from './RadiusReducer'
 */
 export default combineReducers(
   {
-    score: ScoreReducer,
-    region: RadiusReducer
+    region: RadiusReducer,
+    location: LocationReducer
   }
 );

@@ -1,2 +1,2 @@
 export * from './RadiusActions';
-export * from './ScoreActions';
+export * from './LocationActions';

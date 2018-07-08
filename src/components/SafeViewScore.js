@@ -1,13 +1,23 @@
 import React, {Component} from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import {Card} from './common';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Foundation';
 import { connect } from 'react-redux';
 import { crimesFetch } from './actions';
 import { crimeOptions } from './Constants';
 import { DisplayStyles} from '../styles/DisplayStyles';
 
 class SafeViewScore extends Component {
+
+  getIconName(){
+    switch(this.props.totalScore){
+      case "SAFE": return 'check';
+      case "UNSAFE": return 'x';
+      case "RISKY": return 'safety-cone';
+      case "DANGEROUS": return 'skull';
+      default: return 'wrench';
+    }
+  }
   render(){
     console.log("SafeViewScore");
     const dynStyle = DisplayStyles[this.props.totalScore];
@@ -15,7 +25,7 @@ class SafeViewScore extends Component {
     return(
       <View style={[containerStyle, dynStyle]}>
         <Text style={safeViewStyle}>{this.props.totalScore}</Text>
-        <Icon name='check-circle' size={40} color='white'/>
+        <Icon name={this.getIconName()} size={40} color='white'/>
       </View>
     );
   }
