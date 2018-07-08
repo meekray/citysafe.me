@@ -3,50 +3,18 @@ import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import mapStyle from './src/styles/mapstyle.json';
-import reducers from './src/components/reducers'
-import {ContentSection, Card, MapSection, Header} from './src/components/common';
-import SafeViewScore from './src/components/SafeViewScore';
-import LocationButtons from './src/components/LocationButtons';
-import CrimeStatistics from './src/components/CrimeStatistics';
+import reducers from './src/components/reducers';
+import Router from './src/components/Router';
 //https://itnext.io/install-react-native-maps-with-gradle-3-on-android-44f91a70a395
 
 class App extends Component {
-  render () {
+  render(){
     return (
       <Provider store={createStore(reducers, {}, applyMiddleware(ReduxThunk))}>
-        <Card>
-          <MapSection>
-            <MapView
-              provider={PROVIDER_GOOGLE}
-              style={styles.map}
-              customMapStyle={mapStyle}
-              region={hardCodedLocation}
-              >
-            </MapView>
-          </MapSection>
-          <ContentSection>
-            <LocationButtons/>
-            <SafeViewScore/>
-            <CrimeStatistics/>
-          </ContentSection>
-        </Card>
+        <Router/>
       </Provider>
     );
   }
 }
-
-const hardCodedLocation = {
-  latitude: 42.3313937,
-  longitude: -83.0462747,
-  latitudeDelta: 0.015,
-  longitudeDelta: 0.0121
-};
-
-const styles = StyleSheet.create({
-  container: { ... StyleSheet.absoluteFillObject },
-  map: { ...StyleSheet.absoluteFillObject }
-});
 
 export default App;
