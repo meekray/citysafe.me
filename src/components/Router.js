@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, StatusBar } from 'react-native';
 
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import mapStyle from '../styles/mapstyle.json';
@@ -43,7 +43,11 @@ class Router extends Component {
     console.log(location);
     return (
       <Card>
-                <LocationButtons/>
+      <StatusBar
+        barStyle="light-content"
+        hidden
+      />
+        <LocationButtons/>
         <MapSection>
           <MapView
             provider={PROVIDER_GOOGLE}

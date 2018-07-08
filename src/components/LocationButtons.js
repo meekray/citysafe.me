@@ -2,7 +2,7 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {Card} from './common';
-import Icon from 'react-native-vector-icons/EvilIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SnapSlider from 'react-native-snap-slider';
 import { radiusChanged, crimesFetch } from './actions';
 import { DisplayStyles, statisticStyles, SliderStyle } from '../styles/DisplayStyles';
@@ -45,8 +45,7 @@ class LocationButtons extends Component {
           ref="slider"
           style={groupIconAndText}
           onPress={() => buttonFunction()}>
-            <Icon name={icon} size={25} color='grey'/>
-            <Text style={textButtonStyle}>{name}</Text>
+            <Icon name={icon} size={35} color='white'/>
         </TouchableOpacity>
       </View>
     );
@@ -60,10 +59,11 @@ class LocationButtons extends Component {
           <View style={sliderStyle}>
             <SnapSlider
               items={radiusOptions}
-              minimumTrackTintColor={dynStyle.minimumTrackTintColor}
+              minimumTrackTintColor='white'
               defaultItem={this.state.position}
-              thumbTintColor={dynStyle.thumbTintColor}
+              thumbTintColor='white'
               labelPosition="bottom"
+              itemStyle={{color:'white', fontFamily: 'Lato-Bold'}}
               onSlidingComplete={this.slidingComplete.bind(this)}
             />
           </View>
@@ -79,12 +79,13 @@ class LocationButtons extends Component {
     console.log("LocationButtons");
 
     const {titleStyle, rowStyle, textButtonStyle} = styles;
+    //{this.renderButton("REFRESH LOCATION", "refresh", this.onRefreshPress.bind(this))}
 
     return(
       <View>
+
         <View style={rowStyle}>
-          {this.renderButton("REFRESH LOCATION", "refresh", this.onRefreshPress.bind(this))}
-          {this.renderButton("CRIME RADIUS", "arrow-up", this.onRadiusPress.bind(this))}
+          {this.renderButton("CRIME RADIUS", "map-marker-radius", this.onRadiusPress.bind(this))}
         </View>
         {this.renderSlider()}
       </View>
@@ -94,24 +95,25 @@ class LocationButtons extends Component {
 
 const styles = {
   rowStyle: {
-    height: 40,
+    height: 50,
     flexDirection: 'row',
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
+    backgroundColor: '#17263C'
   },
   groupIconAndText: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   textButtonStyle: {
     fontSize: 15,
-    fontFamily: 'Lato-Regular',
-    color: 'grey'
+    fontFamily: 'Lato-Bold',
+    color: 'white'
   },
   sliderStyle: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#17263C',
     height: 40
   }
 };
