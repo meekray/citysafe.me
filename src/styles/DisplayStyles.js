@@ -1,32 +1,37 @@
 import {StyleSheet} from 'react-native';
 
+export const SAFE_COLOR = '#329E87';
+export const RISKY_COLOR = '#FF9800';
+export const UNSAFE_COLOR = '#E84A5F';
+export const DANGEROUS_COLOR = '#B71C1C';
+
 export const DisplayStyles = {
   SAFE: {
-    backgroundColor: '#329E87'
+    backgroundColor: SAFE_COLOR
   },
   RISKY: {
-    backgroundColor: '#FF9800'
+    backgroundColor: RISKY_COLOR
   },
   UNSAFE: {
-    backgroundColor: '#E65100'
+    backgroundColor: UNSAFE_COLOR
   },
   DANGEROUS: {
-    backgroundColor: '#B71C1C'
+    backgroundColor: DANGEROUS_COLOR
   }
 };
 
 export const StatisticStyles = StyleSheet.create({
   SAFE: {
-    color: '#329E87'
+    color: SAFE_COLOR
   },
   RISKY: {
-    color: '#FF9800'
+    color: RISKY_COLOR
   },
   UNSAFE: {
-    color: '#E65100'
+    color: UNSAFE_COLOR
   },
   DANGEROUS: {
-    color: '#B71C1C'
+    color: DANGEROUS_COLOR
   }
 });
 
