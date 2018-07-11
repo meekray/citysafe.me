@@ -12,6 +12,10 @@ class Router extends Component {
   render () {
     return (
       <Card>
+      <StatusBar
+  backgroundColor="#17263C"
+  barStyle="light-content"
+/>
         <LocationButtons/>
         <MapSection/>
         <ContentSection>

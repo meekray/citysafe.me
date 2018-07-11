@@ -16,7 +16,7 @@ class CrimeStatistics extends Component {
   renderStat(word){
     const {crimeStatStyle, crimeNumStyle, crimeNameStyle} = styles;
     const statistic = this.props[word];
-    const dynStyle = StatisticStyles[this.props.totalScore];
+    const dynStyle = StatisticStyles[this.props.baselineScore];
 
     return (
         <View style={crimeStatStyle}>
@@ -80,7 +80,7 @@ const styles = {
 //https://stackoverflow.com/questions/40386128/how-does-a-redux-connected-component-know-when-to-re-render
 
 const mapStateToProps = state => {
-  const { isLoaded, DAMAGE, ASSAULT, ROBBERY, DRUGS, totalScore } = state.region;
-  return { isLoaded, DAMAGE, ASSAULT, ROBBERY, DRUGS, totalScore};
+  const { isLoaded, DAMAGE, ASSAULT, ROBBERY, DRUGS, baselineScore } = state.region;
+  return { isLoaded, DAMAGE, ASSAULT, ROBBERY, DRUGS, baselineScore};
 };
 export default connect(mapStateToProps, { crimesFetch })(CrimeStatistics);

@@ -45,6 +45,24 @@ export default (state = INITIAL_STATE, action) => {
         totalScore: totalScore
       }
     }
+    case 'BASELINE_FETCH_SUCCESS':
+    {
+      var scoresA = [0, 0, 0, 0];
+
+      for(var i = 0; i < crimeOptions.length; i++){
+        for(var j = 0; j < action.payload.length; j++){
+          if(action.payload[j].offense_category.includes(crimeOptions[i].crimeType)){
+            scoresA[i]++;
+          }
+        }
+      }
+      var baselineScore = generateScore(scoresA);
+      console.log(totalScore);
+      return {
+        ...state,
+        baselineScore: baselineScore
+      }
+    }
     default:
       return state;
   }

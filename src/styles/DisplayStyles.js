@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export const SAFE_COLOR = '#329E87';
 export const RISKY_COLOR = '#FF9800';
 export const UNSAFE_COLOR = '#E84A5F';
-export const DANGEROUS_COLOR = '#B71C1C';
+export const DANGER_COLOR = '#B71C1C';
 
 export const DisplayStyles = {
   SAFE: {
@@ -15,8 +15,8 @@ export const DisplayStyles = {
   UNSAFE: {
     backgroundColor: UNSAFE_COLOR
   },
-  DANGEROUS: {
-    backgroundColor: DANGEROUS_COLOR
+  DANGER: {
+    backgroundColor: DANGER_COLOR
   }
 };
 
@@ -30,8 +30,8 @@ export const StatisticStyles = StyleSheet.create({
   UNSAFE: {
     color: UNSAFE_COLOR
   },
-  DANGEROUS: {
-    color: DANGEROUS_COLOR
+  DANGER: {
+    color: DANGER_COLOR
   }
 });
 
@@ -48,7 +48,7 @@ export const SliderStyle = {
     minimumTrackTintColor: '#E65100',
     thumbTintColor:'#E65100'
   },
-  DANGEROUS: {
+  DANGER: {
     minimumTrackTintColor: '#B71C1C',
     thumbTintColor:'#B71C1C'
   }

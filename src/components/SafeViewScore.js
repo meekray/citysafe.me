@@ -3,28 +3,31 @@ import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import {Card} from './common';
 import Icon from 'react-native-vector-icons/Foundation';
 import { connect } from 'react-redux';
-import { crimesFetch } from './actions';
+import { baselineScoreFetch } from './actions';
 import { crimeOptions } from './Constants';
 import { DisplayStyles} from '../styles/DisplayStyles';
 
 class SafeViewScore extends Component {
 
+  componentWillMount(){
+    this.props.baselineScoreFetch();
+  }
   getIconName(){
-    switch(this.props.totalScore){
+    switch(this.props.baselineScore){
       case "SAFE": return 'check';
       case "UNSAFE": return 'x';
       case "RISKY": return 'safety-cone';
-      case "DANGEROUS": return 'skull';
+      case "DANGER": return 'skull';
       default: return 'wrench';
     }
   }
   render(){
     console.log("SafeViewScore");
-    const dynStyle = DisplayStyles[this.props.totalScore];
+    const dynStyle = DisplayStyles[this.props.baselineScore];
     const {safeViewStyle, iconStyle, containerStyle} = styles;
     return(
       <View style={[containerStyle, dynStyle]}>
-        <Text style={safeViewStyle}>{this.props.totalScore}</Text>
+        <Text style={safeViewStyle}>{this.props.baselineScore}</Text>
         <Icon name={this.getIconName()} size={40} color='white'/>
       </View>
     );
@@ -47,7 +50,8 @@ const styles = {
 };
 
 const mapStateToProps = state => {
-  const { totalScore } = state.region;
-  return { totalScore };
+  const { baselineScore } = state.region;
+  return { baselineScore };
 }
-export default connect (mapStateToProps, {crimesFetch})(SafeViewScore);
+
+export default connect (mapStateToProps, {baselineScoreFetch})(SafeViewScore);
