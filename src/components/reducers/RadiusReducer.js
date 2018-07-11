@@ -1,7 +1,7 @@
 import { crimeOptions, generateScore } from '../Constants';
 
 const INITIAL_STATE = {
-  radius: 250,
+  radius: 500,
   isLoaded: false
 };
 //TODO set up initial state

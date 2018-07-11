@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import { View, Dimensions, StyleSheet} from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import {Circle} from 'react-native-maps';
 import { connect } from 'react-redux';
 import { radiusChanged } from './actions';
 import mapStyle from './mapstyle.json';
+import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
 
 class MapSection extends Component {
   state = {
-    latitude: 43.3,
-    longitude: -43.43,
-    isLoaded: false,
-    radius: 500
+    latitude: 0,
+    longitude: 0
   };
 
   componentWillMount() {
@@ -22,33 +22,38 @@ class MapSection extends Component {
         });
       },
       (error) => console.log(error),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10 },
-    ).then(() => {
-      console.log(this.state.isLoaded);
-    })
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10 }
+    )
   }
 
   onMapLoad() {
-    const { isLoaded } = this.state;
-    this.setState({
-      isLoaded: true
-    });
+    console.log("SeND");
   }
 
   renderCircle(){
-    var radius;
-    if(this.props.radius === "undefined") radius = 500;
-    else radius = this.props.radius
-    if(this.state.isLoaded){
+    if(this.isLoaded()){
+      var radius;
+      if(this.props.radius === "undefined") radius = 500;
+      else radius = this.props.radius;
       return(
-        <MapView.Circle
+        <Circle
           center={{latitude: this.state.latitude, longitude: this.state.longitude}}
           radius={radius}
+          strokeWidth={2}
+          fillColor='rgba(23,38,60,0.3)'
+          strokeColor='rgba(23,38,60,0.8)'
         />
       );
     }
   }
+
+  isLoaded(){
+    if(this.state.latitude) return true;
+    else return false;
+  }
   render(){
+    console.log("MapSection");
+
     const location = {
       latitude: this.state.latitude,
       longitude: this.state.longitude,
@@ -56,18 +61,20 @@ class MapSection extends Component {
       longitudeDelta: 0.015
     }
     return (
-      <View style ={styles.containerStyle}>
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={MapStyles.map}
-          customMapStyle={mapStyle}
-          region={location}
-          onMapReady={this.onMapLoad.bind(this)}
-          showsUserLocation={true}
-          >
-          {this.renderCircle()}
-        </MapView>
-      </View>
+      <ShimmerPlaceHolder autoRun={true} visible={this.isLoaded()} height={250}
+      width={Dimensions.get('window').width}
+      colorShimmer={['#17263c', '#1c2e49', '#17263c']}>
+        <View style ={styles.containerStyle}>
+          <MapView
+            provider={PROVIDER_GOOGLE}
+            style={MapStyles.map}
+            region={location}
+            showsUserLocation={true}
+            >
+            {this.renderCircle()}
+          </MapView>
+        </View>
+      </ShimmerPlaceHolder>
     );
   }
 
