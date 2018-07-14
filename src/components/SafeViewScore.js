@@ -10,7 +10,7 @@ import { DisplayStyles} from '../styles/DisplayStyles';
 class SafeViewScore extends Component {
 
   componentDidUpdate(){
-    this.props.baselineScoreFetch();
+    this.props.baselineScoreFetch(this.props.latitude, this.props.longitude);
   }
   getIconName(){
     switch(this.props.baselineScore){

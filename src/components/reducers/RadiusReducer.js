@@ -35,7 +35,7 @@ export default (state = INITIAL_STATE, action) => {
         }
       }
       var totalScore = generateScore(scores);
-      console.log("totalSCore: " + totalScore);
+      console.log("totalScore: " + totalScore);
       return {
         ...state,
         isLoaded: true,
