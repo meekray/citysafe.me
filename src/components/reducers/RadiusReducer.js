@@ -23,7 +23,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         isLoaded: action.payload
       }
-    case 'CRIMES_FETCH_SUCCESS':
+    case 'SCORE_FETCH_SUCCESS':
     {
       var scores = [0, 0, 0, 0];
 
@@ -63,9 +63,37 @@ export default (state = INITIAL_STATE, action) => {
         baselineScore: baselineScore
       }
     }
+    case 'CRIMES_FETCH_SUCCESS':
+    {
+      var heatMapCrimes = transformToHeatMapCoords(action.payload);
+      return {
+        ...state,
+        crimes: heatMapCrimes
+      }
+    }
     default:
       return state;
   }
+}
+
+const transformToHeatMapCoords = (crimes) => {
+  heatMapCoords = [];
+  for(var i = 0; i < crimes.length; i++){
+    var heatMapCoord = {
+      latitude: 0,
+      longitude: 0,
+      weight: 0
+    };
+    heatMapCoord.latitude = crimes[i].location.coordinates[1];
+    heatMapCoord.longitude = crimes[i].location.coordinates[0];
+    heatMapCoord.weight = getWeight(crimes[i].offence_category);
+    heatMapCoords.push(heatMapCoord);
+  }
+  return heatMapCoords;
+}
+
+const getWeight = (offenseCategory) => {
+  return 1;
 }
 
 
