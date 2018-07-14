@@ -9,18 +9,45 @@ import CrimeStatistics from './CrimeStatistics';
 //https://itnext.io/install-react-native-maps-with-gradle-3-on-android-44f91a70a395
 
 class Router extends Component {
+  state = {
+    latitude: 0,
+    longitude: 0
+  };
+
+  onLocationSet(position){
+    this.setState({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+    });
+  }
+
+  componentWillMount() {
+    this.watchId = navigator.geolocation.watchPosition(
+      (position) => this.onLocationSet(position),
+      (error) => console.log(error),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10 }
+    )
+  }
+
   render () {
+    console.log("Router");
     return (
       <Card>
-      <StatusBar
-  backgroundColor="#17263C"
-  barStyle="light-content"
-/>
-        <LocationButtons/>
-        <MapSection/>
+        <StatusBar backgroundColor="#17263C" barStyle="light-content"/>
+        <LocationButtons
+          latitude={this.state.latitude}
+          longitude={this.state.longitude}/>
+        <MapSection
+          latitude={this.state.latitude}
+          longitude={this.state.longitude}
+        />
         <ContentSection>
-          <SafeViewScore/>
-          <CrimeStatistics/>
+          <SafeViewScore
+            latitude={this.state.latitude}
+            longitude={this.state.longitude}/>
+          <CrimeStatistics
+            latitude={this.state.latitude}
+            longitude={this.state.longitude}/>
         </ContentSection>
       </Card>
     );

@@ -8,27 +8,7 @@ import mapStyle from './mapstyle.json';
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
 
 class MapSection extends Component {
-  state = {
-    latitude: 0,
-    longitude: 0
-  };
 
-  componentWillMount() {
-    this.watchId = navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.setState({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        });
-      },
-      (error) => console.log(error),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10 }
-    )
-  }
-
-  onMapLoad() {
-    console.log("SeND");
-  }
 
   renderCircle(){
     if(this.isLoaded()){
@@ -37,7 +17,7 @@ class MapSection extends Component {
       else radius = this.props.radius;
       return(
         <Circle
-          center={{latitude: this.state.latitude, longitude: this.state.longitude}}
+          center={{latitude: this.props.latitude, longitude: this.props.longitude}}
           radius={radius}
           strokeWidth={2}
           fillColor='rgba(23,38,60,0.3)'
@@ -48,10 +28,7 @@ class MapSection extends Component {
   }
 
   renderHeatMap() {
-    console.log("Crimes about to render.")
     if(this.isLoaded() && this.props.crimes !== undefined){
-      console.log("LOADED.");
-      console.log(this.props.crimes);
       return (
         <MapView.Heatmap
           points = {this.props.crimes}
@@ -68,14 +45,14 @@ class MapSection extends Component {
     }
   }
   isLoaded(){
-    if(this.state.latitude) return true;
+    if(this.props.latitude != 0) return true;
     else return false;
   }
   render(){
     console.log("MapSection");
     const location = {
-      latitude: this.state.latitude,
-      longitude: this.state.longitude,
+      latitude: this.props.latitude,
+      longitude: this.props.longitude,
       latitudeDelta: 0.015,
       longitudeDelta: 0.015
     }

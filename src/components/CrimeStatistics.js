@@ -9,8 +9,15 @@ import { StatisticStyles } from '../styles/DisplayStyles';
 
 class CrimeStatistics extends Component {
 
-  componentWillMount () {
-    this.props.crimesFetch(500);
+  state = {
+    latitude: 0,
+    longitude: 0
+  };
+
+  componentDidUpdate () {
+    if(!this.props.isLoaded){
+        this.props.crimesFetch(500, this.props.latitude,this.props.longitude);
+    }
   }
 
   renderStat(word){
@@ -81,6 +88,7 @@ const styles = {
 
 const mapStateToProps = state => {
   const { isLoaded, DAMAGE, ASSAULT, ROBBERY, DRUGS, baselineScore } = state.region;
-  return { isLoaded, DAMAGE, ASSAULT, ROBBERY, DRUGS, baselineScore};
+  return { isLoaded, DAMAGE, ASSAULT, ROBBERY, DRUGS, baselineScore };
+
 };
 export default connect(mapStateToProps, { crimesFetch })(CrimeStatistics);

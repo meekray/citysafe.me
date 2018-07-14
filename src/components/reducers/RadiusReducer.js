@@ -35,6 +35,7 @@ export default (state = INITIAL_STATE, action) => {
         }
       }
       var totalScore = generateScore(scores);
+      console.log("totalSCore: " + totalScore);
       return {
         ...state,
         isLoaded: true,
@@ -57,7 +58,7 @@ export default (state = INITIAL_STATE, action) => {
         }
       }
       var baselineScore = generateScore(scoresA);
-      console.log(totalScore);
+      console.log("baselineScore: " + baselineScore);
       return {
         ...state,
         baselineScore: baselineScore

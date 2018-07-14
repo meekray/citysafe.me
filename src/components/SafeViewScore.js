@@ -9,7 +9,7 @@ import { DisplayStyles} from '../styles/DisplayStyles';
 
 class SafeViewScore extends Component {
 
-  componentWillMount(){
+  componentDidUpdate(){
     this.props.baselineScoreFetch();
   }
   getIconName(){

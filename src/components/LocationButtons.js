@@ -28,10 +28,9 @@ class LocationButtons extends Component {
     const {refreshPressed, position } = this.state;
     const newSize = radiusOptions[itemSelected].value;
     this.props.radiusChanged(newSize);
-    this.props.crimesFetch(newSize);
+    this.props.crimesFetch(newSize, this.props.latitude, this.props.longitude);
     this.onRadiusPress(itemSelected);
     this.setState({
-      refreshPressed: !refreshPressed,
       position: itemSelected
     });
   }
