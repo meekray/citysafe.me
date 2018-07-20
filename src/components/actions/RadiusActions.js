@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import {DetroitURL} from '../config';
 export const radiusChanged = (newSize) => {
   return {
     type: "RADIUS_CHANGED",
@@ -16,7 +16,7 @@ export const loadedFetch = (isLoaded) => {
 
 export const crimesFetch = (radius, latitude, longitude) => {
   return ( dispatch ) => {
-    axios.get(`https://data.detroitmi.gov/resource/9i6z-cm98.json?$where=within_circle(location,${latitude},${longitude},${radius})&$limit=500&$select=location,offense_category`)
+    axios.get(DetroitURL(radius, latitude, longitude))
     .then(response => {
       dispatch({ type: "SCORE_FETCH_SUCCESS", payload: response.data})
       dispatch({ type: "CRIMES_FETCH_SUCCESS", payload: response.data})
@@ -29,7 +29,7 @@ export const crimesFetch = (radius, latitude, longitude) => {
 
 export const baselineScoreFetch = (latitude, longitude) => {
   return ( dispatch ) => {
-    axios.get(`https://data.detroitmi.gov/resource/9i6z-cm98.json?$where=within_circle(location,${latitude},${longitude},500)&$limit=5000&$select=location,offense_category`)
+    axios.get(DetroitURL(500, latitude, longitude))
     .then(response => {
       dispatch({ type: "BASELINE_FETCH_SUCCESS", payload: response.data})
     })

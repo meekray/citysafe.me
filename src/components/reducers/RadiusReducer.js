@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   radius: 500,
   isLoaded: false
 };
+
 //TODO set up initial state
 /*
   --> Produces a piece of [application] state [auth]
@@ -26,15 +27,7 @@ export default (state = INITIAL_STATE, action) => {
     case 'SCORE_FETCH_SUCCESS':
     {
       var scores = [0, 0, 0, 0];
-
-      for(var i = 0; i < crimeOptions.length; i++){
-        for(var j = 0; j < action.payload.length; j++){
-          if(action.payload[j].offense_category.includes(crimeOptions[i].crimeType)){
-            scores[i]++;
-          }
-        }
-      }
-      var totalScore = generateScore(scores);
+      var totalScore = generateScore(scores, action);
       console.log("totalScore: " + totalScore);
       return {
         ...state,
@@ -48,16 +41,8 @@ export default (state = INITIAL_STATE, action) => {
     }
     case 'BASELINE_FETCH_SUCCESS':
     {
-      var scoresA = [0, 0, 0, 0];
-
-      for(var i = 0; i < crimeOptions.length; i++){
-        for(var j = 0; j < action.payload.length; j++){
-          if(action.payload[j].offense_category.includes(crimeOptions[i].crimeType)){
-            scoresA[i]++;
-          }
-        }
-      }
-      var baselineScore = generateScore(scoresA);
+      var scores = [0, 0, 0, 0];
+      var baselineScore = generateScore(scores, action);
       console.log("baselineScore: " + baselineScore);
       return {
         ...state,
