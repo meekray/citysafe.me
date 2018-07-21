@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
-import { View, Dimensions, StyleSheet} from 'react-native';
+import { Text, View, Dimensions, StyleSheet} from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import {Circle} from 'react-native-maps';
 import { connect } from 'react-redux';
 import { radiusChanged, crimesFetch } from './actions';
 import mapStyle from './mapstyle.json';
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
+import LocationButtons from './LocationButtons';
 
 class MapSection extends Component {
 
 
   renderCircle(){
-    if(this.isLoaded()){
+    if(this.isLoaded() && this.props.crimes !== undefined){
       var radius;
       if(this.props.radius === "undefined") radius = 500;
       else radius = this.props.radius;
@@ -44,10 +45,12 @@ class MapSection extends Component {
       return <View></View>;
     }
   }
+
   isLoaded(){
     if(this.props.latitude != 0) return true;
     else return false;
   }
+  
   render(){
     console.log("MapSection");
     const location = {
@@ -57,7 +60,10 @@ class MapSection extends Component {
       longitudeDelta: 0.015
     }
     return (
-      <ShimmerPlaceHolder autoRun={true} visible={this.isLoaded()} height={250}
+      <ShimmerPlaceHolder
+      autoRun={true}
+      visible={this.isLoaded()}
+      height={250}
       width={Dimensions.get('window').width}
       colorShimmer={['#17263c', '#1c2e49', '#17263c']}>
         <View style ={styles.containerStyle}>
@@ -70,6 +76,9 @@ class MapSection extends Component {
             {this.renderCircle()}
             {this.renderHeatMap()}
           </MapView>
+          <LocationButtons
+            latitude={this.props.latitude}
+            longitude={this.props.longitude}/>
         </View>
       </ShimmerPlaceHolder>
     );

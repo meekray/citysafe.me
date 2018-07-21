@@ -6,74 +6,16 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SnapSlider from 'react-native-snap-slider';
 import { radiusChanged, crimesFetch } from './actions';
 import { DisplayStyles, statisticStyles, SliderStyle } from '../styles/DisplayStyles';
+import {FloatingAction} from 'react-native-floating-action';
 
 class LocationButtons extends Component {
-  state = {
-    refreshPressed: false,
-    position: 2
-  };
-
-  onRadiusPress(itemSelected) {
-    const { refreshPressed } = this.state;
-    this.setState({
-      refreshPressed: !refreshPressed
-    });
-  }
-
-  onRefreshPress(){
-
-  }
 
   slidingComplete(itemSelected){
-    const {refreshPressed, position } = this.state;
-    const newSize = radiusOptions[itemSelected].value;
-    this.props.radiusChanged(newSize);
-    this.props.crimesFetch(newSize, this.props.latitude, this.props.longitude);
-    this.onRadiusPress(itemSelected);
-    this.setState({
-      position: itemSelected
-    });
+    console.log(itemSelected);
+    this.props.radiusChanged(itemSelected);
+    this.props.crimesFetch(itemSelected, this.props.latitude, this.props.longitude);
   }
 
-  renderButton(name, icon, buttonFunction) {
-    const {textButtonStyle, groupIconAndText} = styles;
-
-    return(
-      <View>
-        <TouchableOpacity
-          ref="slider"
-          style={groupIconAndText}
-          onPress={() => buttonFunction()}>
-            <Icon name={icon} size={35} color='white'/>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
-  renderSlider(){
-    const { sliderStyle } = styles;
-    const dynStyle = SliderStyle[this.props.totalScore];
-    if(this.state.refreshPressed){
-      return(
-          <View style={sliderStyle}>
-            <SnapSlider
-              items={radiusOptions}
-              minimumTrackTintColor='white'
-              defaultItem={this.state.position}
-              thumbTintColor='white'
-              labelPosition="bottom"
-              itemStyle={{color:'white', fontFamily: 'Lato-Bold'}}
-              onSlidingComplete={this.slidingComplete.bind(this)}
-            />
-          </View>
-      );
-    }
-    else {
-        return(
-          <View></View>
-        );
-    }
-  }
   render(){
     console.log("LocationButtons");
 
@@ -81,41 +23,61 @@ class LocationButtons extends Component {
     //{this.renderButton("REFRESH LOCATION", "refresh", this.onRefreshPress.bind(this))}
 
     return(
-      <View>
-
-        <View style={rowStyle}>
-          {this.renderButton("CRIME RADIUS", "map-marker-radius", this.onRadiusPress.bind(this))}
-        </View>
-        {this.renderSlider()}
-      </View>
+      <FloatingAction
+        floatingIcon={<Icon name='map-marker-radius' size={20} color='white'/>}
+        actionsPaddingTopBottom={0}
+        position={'left'}
+        distanceToEdge={20}
+        actions={actions}
+        color='#17263C'
+        onPressItem={
+          (name) => {
+            console.log(`selected button: ${name}`);
+            this.slidingComplete(parseInt(name, 10))
+          }
+        }
+      />
     );
   }
 }
 
 const styles = {
-  rowStyle: {
-    height: 50,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    backgroundColor: '#17263C'
-  },
-  groupIconAndText: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  textButtonStyle: {
-    fontSize: 15,
-    fontFamily: 'Lato-Bold',
+  actionItemStyle: {
+    fontFamily: 'Lato-Regular',
+    fontSize: 12,
     color: 'white'
-  },
-  sliderStyle: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#17263C',
-    height: 40
   }
 };
+
+const radiusValue = (radius) => {
+  const {actionItemStyle} = styles;
+  return (
+    <Text style={actionItemStyle}>
+      {radius}M
+    </Text>);
+}
+
+
+const actions = [
+{
+   icon: radiusValue(100),
+   name: '100',
+   position: 1,
+   color: '#17263C'
+},
+{
+  icon: radiusValue(250),
+  name: '250',
+  position: 2,
+  color: '#17263C'
+},
+{
+    icon: radiusValue(500),
+    name: '500',
+    position: 3,
+    color: '#17263C'
+}
+];
 
 const radiusOptions = [
     {value: 100, label: '100m'},

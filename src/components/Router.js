@@ -6,6 +6,7 @@ import SafeViewScore from './SafeViewScore';
 import MapSection from './MapSection';
 import LocationButtons from './LocationButtons';
 import CrimeStatistics from './CrimeStatistics';
+
 //https://itnext.io/install-react-native-maps-with-gradle-3-on-android-44f91a70a395
 
 class Router extends Component {
@@ -31,12 +32,10 @@ class Router extends Component {
 
   render () {
     console.log("Router");
-    return (
+      return (
       <Card>
         <StatusBar backgroundColor="#17263C" barStyle="light-content"/>
-        <LocationButtons
-          latitude={this.state.latitude}
-          longitude={this.state.longitude}/>
+
         <MapSection
           latitude={this.state.latitude}
           longitude={this.state.longitude}
@@ -53,7 +52,5 @@ class Router extends Component {
     );
   }
 }
-
-
 
 export default Router;
