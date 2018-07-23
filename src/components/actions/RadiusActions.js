@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {DetroitURL} from '../config';
+import {DetroitURL} from '../Models';
 export const radiusChanged = (newSize) => {
   return {
     type: "RADIUS_CHANGED",

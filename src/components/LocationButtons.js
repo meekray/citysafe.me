@@ -1,12 +1,11 @@
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import React, {Component} from 'react';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import {Card} from './common';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import SnapSlider from 'react-native-snap-slider';
+
 import { radiusChanged, crimesFetch } from './actions';
-import { DisplayStyles, statisticStyles, SliderStyle } from '../styles/DisplayStyles';
-import {FloatingAction} from 'react-native-floating-action';
+import { DisplayStyles, statisticStyles, NAVY_BLUE } from '../styles/DisplayStyles';
+import { FloatingAction } from 'react-native-floating-action';
 
 class LocationButtons extends Component {
 
@@ -26,10 +25,10 @@ class LocationButtons extends Component {
       <FloatingAction
         floatingIcon={<Icon name='map-marker-radius' size={20} color='white'/>}
         actionsPaddingTopBottom={0}
-        position={'left'}
-        distanceToEdge={20}
+        position={'right'}
+        distanceToEdge={10}
         actions={actions}
-        color='#17263C'
+        color={NAVY_BLUE}
         onPressItem={
           (name) => {
             console.log(`selected button: ${name}`);
@@ -63,19 +62,19 @@ const actions = [
    icon: radiusValue(100),
    name: '100',
    position: 1,
-   color: '#17263C'
+   color: NAVY_BLUE
 },
 {
   icon: radiusValue(250),
   name: '250',
   position: 2,
-  color: '#17263C'
+  color: NAVY_BLUE
 },
 {
     icon: radiusValue(500),
     name: '500',
     position: 3,
-    color: '#17263C'
+    color: NAVY_BLUE
 }
 ];
 

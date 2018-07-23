@@ -6,10 +6,12 @@ import SafeViewScore from './SafeViewScore';
 import MapSection from './MapSection';
 import LocationButtons from './LocationButtons';
 import CrimeStatistics from './CrimeStatistics';
+import CitySelection from './CitySelection';
+
 
 //https://itnext.io/install-react-native-maps-with-gradle-3-on-android-44f91a70a395
 
-class Router extends Component {
+class Main extends Component {
   state = {
     latitude: 0,
     longitude: 0
@@ -53,4 +55,4 @@ class Router extends Component {
   }
 }
 
-export default Router;
+export default Main;
