@@ -84,9 +84,4 @@ const radiusOptions = [
     {value: 500, label: '500m'}
 ];
 
-const mapStateToProps = state => {
-  const { totalScore } = state.region;
-  return { totalScore };
-};
-
-export default connect(mapStateToProps, {radiusChanged, crimesFetch})(LocationButtons);
+export default connect(null, {radiusChanged, crimesFetch})(LocationButtons);

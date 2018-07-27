@@ -14,10 +14,16 @@ class CrimeStatistics extends Component {
     longitude: 0
   };
 
-  componentDidUpdate () {
-    if(!this.props.isLoaded){
-        this.props.crimesFetch(500, this.props.latitude,this.props.longitude);
-    }
+  locationExists(){
+    console.log(this.props.latitude);
+    return this.props.latitude !== 0;
+  }
+
+  componentDidUpdate  () {
+      if(!this.props.isLoaded && this.locationExists()){
+          this.props.crimesFetch(500, this.props.latitude,this.props.longitude);
+      }
+
   }
 
   renderStat(word){
@@ -84,11 +90,9 @@ const styles = {
   }
 };
 
-//https://stackoverflow.com/questions/40386128/how-does-a-redux-connected-component-know-when-to-re-render
-
 const mapStateToProps = state => {
   const { isLoaded, DAMAGE, ASSAULT, ROBBERY, DRUGS, baselineScore } = state.region;
   return { isLoaded, DAMAGE, ASSAULT, ROBBERY, DRUGS, baselineScore };
-
 };
+
 export default connect(mapStateToProps, { crimesFetch })(CrimeStatistics);

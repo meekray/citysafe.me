@@ -67,6 +67,10 @@
 		8EA04A2DAF8444648BF5E8D8 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16AAB86231A842E1B0548B29 /* Lato-LightItalic.ttf */; };
 		C48F148721E24B01A1CB478D /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E625C066129E422BA085F7DB /* Lato-Regular.ttf */; };
 		01E3B0858F9545BAAD810518 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 72F4F0715C094C34869B28B9 /* libBVLinearGradient.a */; };
+		CCF46A1FD71A4F769FAA36CF /* MavenPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24DC796F8EB7448A9D63A4E8 /* MavenPro-Black.ttf */; };
+		FF1F678376244539B0B393FE /* MavenPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C02D7590DB384468A8CB5A51 /* MavenPro-Bold.ttf */; };
+		B76BDFDE59BE4829852F1462 /* MavenPro-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D74325894D06411C8507C351 /* MavenPro-Medium.ttf */; };
+		47C710ABAAC945A9B6FC5ED9 /* MavenPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C5ECE8C96B44E4292358713 /* MavenPro-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -404,6 +408,10 @@
 		E625C066129E422BA085F7DB /* Lato-Regular.ttf */ = {isa = PBXFileReference; name = "Lato-Regular.ttf"; path = "../assets/fonts/Lato-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		3F2866F418154381B390FB15 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; name = "BVLinearGradient.xcodeproj"; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		72F4F0715C094C34869B28B9 /* libBVLinearGradient.a */ = {isa = PBXFileReference; name = "libBVLinearGradient.a"; path = "libBVLinearGradient.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		24DC796F8EB7448A9D63A4E8 /* MavenPro-Black.ttf */ = {isa = PBXFileReference; name = "MavenPro-Black.ttf"; path = "../assets/fonts/MavenPro-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C02D7590DB384468A8CB5A51 /* MavenPro-Bold.ttf */ = {isa = PBXFileReference; name = "MavenPro-Bold.ttf"; path = "../assets/fonts/MavenPro-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D74325894D06411C8507C351 /* MavenPro-Medium.ttf */ = {isa = PBXFileReference; name = "MavenPro-Medium.ttf"; path = "../assets/fonts/MavenPro-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9C5ECE8C96B44E4292358713 /* MavenPro-Regular.ttf */ = {isa = PBXFileReference; name = "MavenPro-Regular.ttf"; path = "../assets/fonts/MavenPro-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -701,6 +709,10 @@
 				48BF04D6E1C44336990FA949 /* Lato-Light.ttf */,
 				16AAB86231A842E1B0548B29 /* Lato-LightItalic.ttf */,
 				E625C066129E422BA085F7DB /* Lato-Regular.ttf */,
+				24DC796F8EB7448A9D63A4E8 /* MavenPro-Black.ttf */,
+				C02D7590DB384468A8CB5A51 /* MavenPro-Bold.ttf */,
+				D74325894D06411C8507C351 /* MavenPro-Medium.ttf */,
+				9C5ECE8C96B44E4292358713 /* MavenPro-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1180,6 +1192,10 @@
 				297D5A721F7746A99E670BE8 /* Lato-Light.ttf in Resources */,
 				8EA04A2DAF8444648BF5E8D8 /* Lato-LightItalic.ttf in Resources */,
 				C48F148721E24B01A1CB478D /* Lato-Regular.ttf in Resources */,
+				CCF46A1FD71A4F769FAA36CF /* MavenPro-Black.ttf in Resources */,
+				FF1F678376244539B0B393FE /* MavenPro-Bold.ttf in Resources */,
+				B76BDFDE59BE4829852F1462 /* MavenPro-Medium.ttf in Resources */,
+				47C710ABAAC945A9B6FC5ED9 /* MavenPro-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,10 +9,16 @@ import { DisplayStyles} from '../styles/DisplayStyles';
 
 class SafeViewScore extends Component {
 
-  componentDidUpdate(){
-    this.props.baselineScoreFetch(this.props.latitude, this.props.longitude);
+  locationExists(){
+    return this.props.latitude !== undefined;
   }
-  
+
+  componentDidUpdate (){
+    if(this.locationExists()){
+      this.props.baselineScoreFetch(this.props.latitude, this.props.longitude);
+    }
+  }
+
   getIconName(){
     switch(this.props.baselineScore){
       case "SAFE": return 'check';

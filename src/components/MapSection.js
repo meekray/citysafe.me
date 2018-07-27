@@ -10,9 +10,8 @@ import LocationButtons from './LocationButtons';
 
 class MapSection extends Component {
 
-
   renderCircle(){
-    if(this.isLoaded() && this.props.crimes !== undefined){
+    if(this.isLoaded() && this.isCrimeSet()){
       var radius;
       if(this.props.radius === "undefined") radius = 500;
       else radius = this.props.radius;
@@ -29,7 +28,7 @@ class MapSection extends Component {
   }
 
   renderHeatMap() {
-    if(this.isLoaded() && this.props.crimes !== undefined){
+    if(this.isLoaded() && this.isCrimeSet()){
       return (
         <MapView.Heatmap
           points = {this.props.crimes}
@@ -47,10 +46,13 @@ class MapSection extends Component {
   }
 
   isLoaded(){
-    if(this.props.latitude != 0) return true;
-    else return false;
+    return(this.props.latitude != 0);
   }
-  
+
+  isCrimeSet(){
+    return (this.props.crimes !== undefined && this.props.crimes.length > 0 );
+  }
+
   render(){
     console.log("MapSection");
     const location = {
@@ -61,17 +63,18 @@ class MapSection extends Component {
     }
     return (
       <ShimmerPlaceHolder
-      autoRun={true}
-      visible={this.isLoaded()}
-      height={250}
-      width={Dimensions.get('window').width}
-      colorShimmer={['#17263c', '#1c2e49', '#17263c']}>
+        autoRun={true}
+        visible={this.isLoaded()}
+        height={250}
+        width={Dimensions.get('window').width}
+        colorShimmer={['#17263c', '#1c2e49', '#17263c']}>
         <View style ={styles.containerStyle}>
           <MapView
             provider={PROVIDER_GOOGLE}
             style={MapStyles.map}
             region={location}
             showsUserLocation={true}
+            customMapStyle={mapStyle}
             >
             {this.renderCircle()}
             {this.renderHeatMap()}

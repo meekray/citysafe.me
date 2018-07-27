@@ -28,7 +28,6 @@ export default (state = INITIAL_STATE, action) => {
     {
       var scores = [0, 0, 0, 0];
       var totalScore = generateScore(scores, action);
-      console.log("totalScore: " + totalScore);
       return {
         ...state,
         isLoaded: true,
@@ -43,7 +42,6 @@ export default (state = INITIAL_STATE, action) => {
     {
       var scores = [0, 0, 0, 0];
       var baselineScore = generateScore(scores, action);
-      console.log("baselineScore: " + baselineScore);
       return {
         ...state,
         baselineScore: baselineScore
@@ -51,10 +49,10 @@ export default (state = INITIAL_STATE, action) => {
     }
     case 'CRIMES_FETCH_SUCCESS':
     {
-      var heatMapCrimes = transformToHeatMapCoords(action.payload);
+
       return {
         ...state,
-        crimes: heatMapCrimes
+        crimes: transformToHeatMapCoords(action.payload)
       }
     }
     default:

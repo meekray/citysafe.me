@@ -9,7 +9,7 @@ import Main from './Main';
 
 class RouterComponent extends Component {
   render () {
-    console.log("Router");
+    console.log("RouterComponent");
     return (
       <Router>
         <Scene key="root" hideNavBar>
