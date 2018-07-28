@@ -15,7 +15,6 @@ class CrimeStatistics extends Component {
   };
 
   locationExists(){
-    console.log(this.props.latitude);
     return this.props.latitude !== 0;
   }
 

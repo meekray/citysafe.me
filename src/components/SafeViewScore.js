@@ -13,12 +13,6 @@ class SafeViewScore extends Component {
     return this.props.latitude !== undefined;
   }
 
-  componentDidUpdate (){
-    if(this.locationExists()){
-      this.props.baselineScoreFetch(this.props.latitude, this.props.longitude);
-    }
-  }
-
   getIconName(){
     switch(this.props.baselineScore){
       case "SAFE": return 'check';
@@ -28,6 +22,13 @@ class SafeViewScore extends Component {
       default: return 'wrench';
     }
   }
+
+  componentDidUpdate (){
+    if(this.locationExists()){
+      this.props.baselineScoreFetch(this.props.latitude, this.props.longitude);
+    }
+  }
+
   render(){
     console.log("SafeViewScore");
     const dynStyle = DisplayStyles[this.props.baselineScore];
@@ -40,6 +41,7 @@ class SafeViewScore extends Component {
     );
   }
 }
+
 const styles = {
   containerStyle: {
     flex: 1,

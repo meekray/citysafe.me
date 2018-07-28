@@ -21,7 +21,7 @@ export const generateScore = (scores, action) => {
     var weightage = crimeOptions[i].riskFactor;
     totalScore += (crimeCount*weightage);
   }
-  console.log(totalScore);
+  //console.log(totalScore);
   switch (true) {
     case (totalScore > 1500):
       return "DANGER";
