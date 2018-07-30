@@ -1,5 +1,7 @@
 import axios from 'axios';
-import {DetroitURL} from '../Models';
+import {GetCrimes} from '../Models';
+import { crimeOptions, generateScore, transformToHeatMapCoords } from '../Control';
+import {CITY_SELECTION} from '../CitySelection';
 
 export const radiusChanged = (newSize) => {
   return {
@@ -16,10 +18,20 @@ export const loadedFetch = (isLoaded) => {
 };
 
 export const crimesFetch = (radius, latitude, longitude) => {
+  var scores = [0, 0, 0, 0];
+  var URL = GetCrimes(radius, latitude, longitude);
+  console.log(CITY_SELECTION);
   return ( dispatch ) => {
-    axios.get(DetroitURL(radius, latitude, longitude))
+    axios.get(URL)
     .then(response => {
-      dispatch({ type: "SCORE_FETCH_SUCCESS", payload: response.data})
+      var totalScore = generateScore(scores, response.data);
+      dispatch({
+        type: "SCORE_FETCH_SUCCESS",
+        payload: {
+          scores: scores,
+          totalScore: totalScore
+        }
+      })
       dispatch({ type: "CRIMES_FETCH_SUCCESS", payload: response.data})
     })
     .catch(error => {
@@ -30,9 +42,11 @@ export const crimesFetch = (radius, latitude, longitude) => {
 
 export const baselineScoreFetch = (latitude, longitude) => {
   return ( dispatch ) => {
-    axios.get(DetroitURL(500, latitude, longitude))
+    axios.get(GetCrimes(500, latitude, longitude))
     .then(response => {
-      dispatch({ type: "BASELINE_FETCH_SUCCESS", payload: response.data})
+      var scores = [0, 0, 0, 0];
+      var baselineScore = generateScore(scores, response.data);
+      dispatch({ type: "BASELINE_FETCH_SUCCESS", payload: baselineScore})
     })
     .catch(error => {
       console.log(error)

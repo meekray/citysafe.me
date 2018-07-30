@@ -35,6 +35,7 @@ class LocationButtons extends Component {
   }
 }
 
+
 const styles = {
   actionItemStyle: {
     fontFamily: 'Lato-Regular',

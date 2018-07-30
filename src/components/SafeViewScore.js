@@ -4,7 +4,7 @@ import {Card} from './common';
 import Icon from 'react-native-vector-icons/Foundation';
 import { connect } from 'react-redux';
 import { baselineScoreFetch } from './actions';
-import { crimeOptions } from './Constants';
+import { crimeOptions } from './Control';
 import { DisplayStyles} from '../styles/DisplayStyles';
 
 class SafeViewScore extends Component {

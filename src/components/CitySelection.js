@@ -6,9 +6,11 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {NAVY_BLUE} from '../styles/DisplayStyles';
 import sanFrancisco from '../styles/sanFrancisco.jpg';
 import {Card} from './common';
-import {mapKey} from './Constants';
+import {mapKey} from './Control';
 import {citySelected} from './actions';
 import { connect } from 'react-redux';
+
+export var CITY_SELECTION = "";
 
 class CitySelection extends Component {
 
@@ -42,7 +44,7 @@ class CitySelection extends Component {
   }
 
   onButtonPress(cityName) {
-    this.props.citySelected(mapKey(cityName));
+    CITY_SELECTION = mapKey(cityName);
     Actions.main();
   }
 

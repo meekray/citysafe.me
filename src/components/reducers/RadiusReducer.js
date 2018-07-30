@@ -1,4 +1,4 @@
-import { crimeOptions, generateScore } from '../Constants';
+import { crimeOptions, generateScore, transformToHeatMapCoords } from '../Control';
 
 const INITIAL_STATE = {
   radius: 500,
@@ -26,30 +26,25 @@ export default (state = INITIAL_STATE, action) => {
       }
     case 'SCORE_FETCH_SUCCESS':
     {
-      var scores = [0, 0, 0, 0];
-      var totalScore = generateScore(scores, action);
       return {
         ...state,
         isLoaded: true,
-        DAMAGE: scores[0],
-        ASSAULT: scores[1],
-        ROBBERY: scores[2],
-        DRUGS: scores[3],
-        totalScore: totalScore
+        DAMAGE: action.payload.scores[0],
+        ASSAULT: action.payload.scores[1],
+        ROBBERY: action.payload.scores[2],
+        DRUGS: action.payload.scores[3],
+        totalScore: action.payload.totalScore
       }
     }
     case 'BASELINE_FETCH_SUCCESS':
     {
-      var scores = [0, 0, 0, 0];
-      var baselineScore = generateScore(scores, action);
       return {
         ...state,
-        baselineScore: baselineScore
+        baselineScore: action.payload
       }
     }
     case 'CRIMES_FETCH_SUCCESS':
     {
-
       return {
         ...state,
         crimes: transformToHeatMapCoords(action.payload)
@@ -59,40 +54,3 @@ export default (state = INITIAL_STATE, action) => {
       return state;
   }
 }
-
-const transformToHeatMapCoords = (crimes) => {
-  heatMapCoords = [];
-  for(var i = 0; i < crimes.length; i++){
-    var heatMapCoord = {
-      latitude: 0,
-      longitude: 0,
-      weight: 0
-    };
-    heatMapCoord.latitude = crimes[i].location.coordinates[1];
-    heatMapCoord.longitude = crimes[i].location.coordinates[0];
-    heatMapCoord.weight = getWeight(crimes[i].offence_category);
-    heatMapCoords.push(heatMapCoord);
-  }
-  return heatMapCoords;
-}
-
-const getWeight = (offenseCategory) => {
-  return 1;
-}
-
-
-/*
--->What Redux is Doing
-  1) Whenever we call an action creater, we take our slice of state
-     which was last produced by the reducer + an action
-  2) After the reducer runs, redux looks at the OLD value of state
-     and the NEW one, and checks if NEW === OLD
-  3) If NEW !== OLD, Redux sends the new STATE to all connected components
-  4) A new piece of state is the output
-*/
-
-/*
---> How JavaScript compares objects ===
-  1) If you instantiate a new object = an old object, JS is NOT
-     creating a new object. *Think Pointers
-*/

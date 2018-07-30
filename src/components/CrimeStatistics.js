@@ -22,7 +22,6 @@ class CrimeStatistics extends Component {
       if(!this.props.isLoaded && this.locationExists()){
           this.props.crimesFetch(500, this.props.latitude,this.props.longitude);
       }
-
   }
 
   renderStat(word){

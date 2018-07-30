@@ -1,3 +1,5 @@
+import {CITY_SELECTION} from './CitySelection';
+
 export const crimeOptions = [
     {crimeType: 'DAMAGE', riskFactor: 2},
     {crimeType: 'ASSAULT', riskFactor: 4},
@@ -8,8 +10,8 @@ export const crimeOptions = [
 export const generateScore = (scores, action) => {
 
   for(var i = 0; i < crimeOptions.length; i++){
-    for(var j = 0; j < action.payload.length; j++){
-      if(action.payload[j].offense_category.includes(crimeOptions[i].crimeType)){
+    for(var j = 0; j < action.length; j++){
+      if(action[j][crimeContainsByCity()].includes(crimeOptions[i].crimeType)){
         scores[i]++;
       }
     }
@@ -36,8 +38,19 @@ export const generateScore = (scores, action) => {
   }
 }
 
+const crimeContainsByCity = () => {
+  switch (true){
+    case (CITY_SELECTION == SAN_FRANCISCO_KEY):
+      return "category";
+
+    case (CITY_SELECTION == DETROIT_KEY):
+      return "offense_category";
+  }
+}
+
+
 export const mapKey = (key) => {
-  switch(key){
+  switch(true){
     case (key == "San Francisco"):
       return SAN_FRANCISCO_KEY;
     case (key == "Detroit"):
@@ -45,6 +58,26 @@ export const mapKey = (key) => {
     default:
       return "COMING_SOON";
   }
+}
+
+export const transformToHeatMapCoords = (crimes) => {
+  heatMapCoords = [];
+  for(var i = 0; i < crimes.length; i++){
+    var heatMapCoord = {
+      latitude: 0,
+      longitude: 0,
+      weight: 0
+    };
+    heatMapCoord.latitude = crimes[i].location.coordinates[1];
+    heatMapCoord.longitude = crimes[i].location.coordinates[0];
+    heatMapCoord.weight = getWeight(crimes[i].offence_category);
+    heatMapCoords.push(heatMapCoord);
+  }
+  return heatMapCoords;
+}
+
+export const getWeight = (offenseCategory) => {
+  return 1;
 }
 
 export const SAN_FRANCISCO_KEY = "SAN_FRANCISCO_KEY";
