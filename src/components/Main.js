@@ -24,12 +24,13 @@ class Main extends Component {
     });
   }
 
-  componentWillMount() {
+  componentDidMount() {
     console.log("Fetching position...");
-    this.watchId = navigator.geolocation.watchPosition(
+    console.log(this.props.cityKey);
+    this.watchId = navigator.geolocation.getCurrentPosition (
       (position) => this.onLocationSet(position),
       (error) => console.log(error),
-      {enableHighAccuracy: true, timeout: 2000, maximumAge: 10000}
+      {enableHighAccuracy: true, timeout: 2000}
     )
   }
 

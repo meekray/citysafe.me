@@ -29,12 +29,7 @@ class LocationButtons extends Component {
         distanceToEdge={10}
         actions={actions}
         color={NAVY_BLUE}
-        onPressItem={
-          (name) => {
-            console.log(`selected button: ${name}`);
-            this.slidingComplete(parseInt(name, 10))
-          }
-        }
+        onPressItem={ (name) => this.slidingComplete(parseInt(name, 10))}
       />
     );
   }

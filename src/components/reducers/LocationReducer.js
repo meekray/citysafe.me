@@ -1,15 +1,15 @@
 const INITIAL_STATE = {
-  latitude: 0,
-  longitude: 0
+  key: "",
+  latitude: "",
+  longitude: ""
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "LOCATION_CHANGED":
+    case "CITY_SELECTED":
       return {
         ...state,
-        latitude: action.payload.latitude,
-        longitude: action.payload.longitude,
+        key: action.payload.key
       };
     default:
       return state;

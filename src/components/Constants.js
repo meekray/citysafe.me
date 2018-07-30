@@ -35,3 +35,17 @@ export const generateScore = (scores, action) => {
       return "???";
   }
 }
+
+export const mapKey = (key) => {
+  switch(key){
+    case (key == "San Francisco"):
+      return SAN_FRANCISCO_KEY;
+    case (key == "Detroit"):
+      return DETROIT_KEY;
+    default:
+      return "COMING_SOON";
+  }
+}
+
+export const SAN_FRANCISCO_KEY = "SAN_FRANCISCO_KEY";
+export const DETROIT_KEY = "DETROIT_KEY";

@@ -5,7 +5,11 @@ import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {NAVY_BLUE} from '../styles/DisplayStyles';
 import sanFrancisco from '../styles/sanFrancisco.jpg';
-import {Card} from './common'
+import {Card} from './common';
+import {mapKey} from './Constants';
+import {citySelected} from './actions';
+import { connect } from 'react-redux';
+
 class CitySelection extends Component {
 
   renderIcon(){
@@ -26,10 +30,10 @@ class CitySelection extends Component {
     );
   }
   renderDescription(){
-    const {cityOptionTextStyle, descriptionStyle} = styles;
+    const {descriptionTextStyle, descriptionStyle} = styles;
     return(
       <View style={descriptionStyle}>
-        <Text style={cityOptionTextStyle}>
+        <Text style={descriptionTextStyle}>
           Wander through your favorite parts of a city, or explore new parts,
           while seeing the crimes that have happened around you.
         </Text>
@@ -37,11 +41,19 @@ class CitySelection extends Component {
     );
   }
 
-  renderCityOption(cityName){
+  onButtonPress(cityName) {
+    this.props.citySelected(mapKey(cityName));
+    Actions.main();
+  }
+
+  renderCityButton(cityName){
     const {buttonOptionStyle, buttonStyle, buttonContainerStyle} = styles;
     return(
       <View style={buttonContainerStyle}>
-        <TouchableOpacity onPress={() => Actions.main()} style={buttonStyle} activeOpacity={0.9}>
+        <TouchableOpacity
+          onPress={this.onButtonPress.bind(this, cityName)}
+          style={buttonStyle}
+          activeOpacity={0.9}>
           <Text style={buttonOptionStyle}>{cityName}</Text>
         </TouchableOpacity>
       </View>
@@ -57,8 +69,8 @@ class CitySelection extends Component {
               <View style={containerStyle}>
                 {this.renderHeadline()}
                 {this.renderDescription()}
-                {this.renderCityOption("Detroit")}
-                {this.renderCityOption("San Francisco")}
+                {this.renderCityButton("Detroit")}
+                {this.renderCityButton("San Francisco")}
               </View>
             </ImageBackground>
           </Card>
@@ -71,14 +83,11 @@ class CitySelection extends Component {
 */
 
 const styles = {
-
+  //// TODO: Reorganize style objects
   containerStyle: {
     flex: 1,
     flexDirection: 'column',
     padding: 20
-  },
-  iconStyle: {
-
   },
   headlineContainerStyle: {
     paddingTop: 150,
@@ -92,32 +101,29 @@ const styles = {
   descriptionStyle: {
     paddingBottom: 20
   },
-  cityOptionTextStyle: {
+  descriptionTextStyle: {
     color: 'white',
-    fontSize: 15,
+    fontSize: 17,
     fontFamily: 'MavenPro-Regular'
   },
   buttonOptionStyle: {
     color: 'white',
     fontSize: 20,
-    fontFamily: 'MavenPro-Bold'
-  },
-  iconStyle: {
-    alignItems: 'center'
+    fontFamily: 'MavenPro-Bold',
+    textAlign: 'center'
   },
   buttonStyle: {
     backgroundColor: '#191919',
     width: 150,
+    height: 30,
     borderRadius: 10,
+    margin: 10,
     alignItems: 'center',
-    margin: 5,
-    height: 30
+    justifyContent: 'center',
   },
   buttonContainerStyle: {
-    flexDirection: 'column',
-    justifyContent: 'center',
     alignItems: 'center'
   }
 };
 
-export default CitySelection;
+export default connect(null, {citySelected})(CitySelection);
