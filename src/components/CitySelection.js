@@ -1,14 +1,12 @@
 import { View, Text, TouchableOpacity, Dimensions, ImageBackground, StatusBar} from 'react-native';
 import React, {Component} from 'react';
-import { Button} from './common';
 import { Actions } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { connect } from 'react-redux';
 import {NAVY_BLUE} from '../styles/DisplayStyles';
 import sanFrancisco from '../styles/sanFrancisco.jpg';
 import {Card} from './common';
 import {mapKey} from './Control';
-import {citySelected} from './actions';
-import { connect } from 'react-redux';
+import { citySelected } from './actions';
 
 export var CITY_SELECTION = "";
 
@@ -36,7 +34,7 @@ class CitySelection extends Component {
     return(
       <View style={descriptionStyle}>
         <Text style={descriptionTextStyle}>
-          Wander through your favorite parts of a city, or explore new parts,
+          Wander through your favorite parts of a city, or explore new ones,
           while seeing the crimes that have happened around you.
         </Text>
       </View>

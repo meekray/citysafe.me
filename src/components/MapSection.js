@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import { Text, View, Dimensions, StyleSheet} from 'react-native';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import {Circle} from 'react-native-maps';
 import { connect } from 'react-redux';
-import { radiusChanged, crimesFetch } from './actions';
-import mapStyle from './mapstyle.json';
+import { View, Dimensions, StyleSheet} from 'react-native';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
+import { Circle } from 'react-native-maps';
+
+import mapStyle from './mapstyle.json';
 import LocationButtons from './LocationButtons';
+import { radiusChanged, crimesFetch } from './actions';
 
 class MapSection extends Component {
 

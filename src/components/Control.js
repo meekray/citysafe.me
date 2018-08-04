@@ -7,12 +7,28 @@ export const crimeOptions = [
     {crimeType: 'DRUGS', riskFactor: 1}
 ];
 
-export const generateScore = (scores, action) => {
+const detroitLabels = {
+  DAMAGE: ['DAMAGE', 'WEAPONS', 'ARSON'],
+  ASSAULT: ['ASSAULT','ASSAULT', 'SEX', 'HOMICIDE'],
+  ROBBERY: ['STOLEN', 'LARCENY', 'ROBBERY', 'BURGLARY'],
+  DRUGS: ['DRUGS', 'LIQUOR'],
+};
 
-  for(var i = 0; i < crimeOptions.length; i++){
-    for(var j = 0; j < action.length; j++){
-      if(action[j][crimeContainsByCity()].includes(crimeOptions[i].crimeType)){
+const sanFranciscoLabels = {
+  DAMAGE: ['VANDALISM', 'ARSON'],
+  ASSAULT: ['ASSAULT','OFFENSES'],
+  ROBBERY: ['THEFT','ROBBERY', 'BURGLARY', 'STOLEN'],
+  DRUGS: ['DRUG'],
+};
+
+export const generateScore = (scores, action) => {
+  for(var j = 0; j < action.length; j++){
+    for(var i = 0; i < crimeOptions.length; i++){
+      var coreCrimeString = action[j][crimeContainsByCity()];
+      var crimeType = crimeOptions[i].crimeType;
+      if(deepComparision(coreCrimeString, crimeType)){
         scores[i]++;
+        break;
       }
     }
   }
@@ -23,15 +39,15 @@ export const generateScore = (scores, action) => {
     var weightage = crimeOptions[i].riskFactor;
     totalScore += (crimeCount*weightage);
   }
-  //console.log(totalScore);
+  console.log(totalScore);
   switch (true) {
-    case (totalScore > 1500):
+    case (totalScore > 5000):
       return "DANGER";
-    case (totalScore > 1000):
+    case (totalScore > 4000):
       return "UNSAFE";
-    case (totalScore > 800):
+    case (totalScore > 3000):
       return "RISKY";
-    case (totalScore <= 800):
+    case (totalScore <= 2000):
       return "SAFE";
     default:
       return "???";
@@ -48,6 +64,18 @@ const crimeContainsByCity = () => {
   }
 }
 
+const deepComparision = (coreCrimeString, crimeType) => {
+  var labels = [];
+  if(CITY_SELECTION == SAN_FRANCISCO_KEY)
+    labels = sanFranciscoLabels[crimeType];
+
+  else if(CITY_SELECTION == DETROIT_KEY)
+    labels = detroitLabels[crimeType];
+
+  for(var i = 0; i < labels.length; i++){
+    if(coreCrimeString.includes(labels[i])) return true;
+  }
+}
 
 export const mapKey = (key) => {
   switch(true){
@@ -70,7 +98,7 @@ export const transformToHeatMapCoords = (crimes) => {
     };
     heatMapCoord.latitude = crimes[i].location.coordinates[1];
     heatMapCoord.longitude = crimes[i].location.coordinates[0];
-    heatMapCoord.weight = getWeight(crimes[i].offence_category);
+    heatMapCoord.weight = getWeight(crimes[i][crimeContainsByCity()]);
     heatMapCoords.push(heatMapCoord);
   }
   return heatMapCoords;

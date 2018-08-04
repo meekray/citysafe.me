@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, ScrollView, StatusBar } from 'react-native';
+import { PermissionsAndroid, StatusBar, Platform  } from 'react-native';
 import reducers from './reducers'
 import {ContentSection, Card, Header} from './common';
 import SafeViewScore from './SafeViewScore';
@@ -9,6 +9,32 @@ import CrimeStatistics from './CrimeStatistics';
 import CitySelection from './CitySelection';
 
 //https://itnext.io/install-react-native-maps-with-gradle-3-on-android-44f91a70a395
+
+const requestPermission = () => {
+  return PermissionsAndroid.request(
+    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+    {
+      'title': 'Access Location',
+      'message': 'Stray uses your location to show you relevant crime statistics.'
+    }
+  ).then(granted => {
+    if(granted === PermissionsAndroid.RESULTS.GRANTED) {
+      return Promise.resolve("You can use the location")
+    } else {
+      return Promise.reject("Location permission denied")
+    }
+  })
+}
+
+const getCoordinates = () => {
+  return requestPermission().then(ok => {
+    return new Promise((resolve, reject) => {
+      const options = Platform.OS === 'android' ? {enableHighAccuracy:true}
+                      : {enableHighAccuracy:true};
+      global.navigator.geolocation.getCurrentPosition(resolve, reject, options)
+    })
+  })
+}
 
 class Main extends Component {
   state = {
@@ -26,12 +52,11 @@ class Main extends Component {
 
   componentDidMount() {
     console.log("Fetching position...");
-    console.log(this.props.cityKey);
-    this.watchId = navigator.geolocation.getCurrentPosition (
-      (position) => this.onLocationSet(position),
-      (error) => console.log(error),
-      {enableHighAccuracy: true, timeout: 2000}
-    )
+    getCoordinates().then(position => {
+        this.onLocationSet(position);
+    }).catch(error => {
+        console.log(error);
+    })
   }
 
   render () {
