@@ -94,8 +94,8 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
 
     defaultConfig {
         applicationId "com.safevibes"
@@ -160,6 +160,7 @@ implementation 'com.google.android.gms:play-services-base:10.0.1'
 implementation 'com.google.android.gms:play-services-maps:10.0.1'
     compile project(':react-native-splash-screen')
     compile project(':react-native-vector-icons')
+    compile project(':react-native-android-location-enabler')
 }
 
 // Run this once to be able to run the application with BUCK
@@ -167,4 +168,12 @@ implementation 'com.google.android.gms:play-services-maps:10.0.1'
 task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.getRequested().getGroup() == 'com.google.android.gms') {
+            details.useVersion('9.8.0')
+        }
+    }
 }

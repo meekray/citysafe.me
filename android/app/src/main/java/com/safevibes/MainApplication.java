@@ -11,6 +11,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.heanoria.library.reactnative.locationenabler.RNAndroidLocationEnablerPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +31,8 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
             new SplashScreenReactPackage(),
             new MapsPackage(),
-            new LinearGradientPackage()
+            new LinearGradientPackage(),
+            new RNAndroidLocationEnablerPackage()
       );
     }
 
