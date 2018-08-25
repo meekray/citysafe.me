@@ -31,7 +31,7 @@ const getCoordinates = () => {
     return new Promise((resolve, reject) => {
       const options = Platform.OS === 'android' ? {enableHighAccuracy:true}
                       : {enableHighAccuracy:true};
-      global.navigator.geolocation.getCurrentPosition(resolve, reject, options)
+      global.navigator.geolocation.getCurrentPosition(resolve, reject)
     })
   })
 }
