@@ -43,9 +43,9 @@ export const generateScore = (scores, action) => {
   switch (true) {
     case (totalScore > 5000):
       return "DANGER";
-    case (totalScore > 4000):
+    case (totalScore > 3500):
       return "UNSAFE";
-    case (totalScore > 3000):
+    case (totalScore > 2000):
       return "RISKY";
     case (totalScore <= 2000):
       return "SAFE";

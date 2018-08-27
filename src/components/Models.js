@@ -6,6 +6,6 @@ export const GetCrimes = (radius, latitude, longitude) => {
     case CITY_SELECTION === "DETROIT_KEY":
       return (`https://data.detroitmi.gov/resource/9i6z-cm98.json?$where=within_circle(location,${latitude},${longitude},${radius})&$limit=100000&$select=location,offense_category`);
     case CITY_SELECTION === "SAN_FRANCISCO_KEY":
-      return (`https://data.sfgov.org/resource/cuks-n6tp.json?$where=within_circle(location,${latitude},${longitude},${radius})&$limit=2000&$select=location,category`);
+      return (`https://data.sfgov.org/resource/cuks-n6tp.json?$where=within_circle(location,${latitude},${longitude},${radius})&$limit=900&$select=location,category`);
   }
 }

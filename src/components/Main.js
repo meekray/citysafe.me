@@ -29,9 +29,9 @@ const requestPermission = () => {
 const getCoordinates = () => {
   return requestPermission().then(ok => {
     return new Promise((resolve, reject) => {
-      const options = Platform.OS === 'android' ? {enableHighAccuracy:true}
-                      : {enableHighAccuracy:true};
-      global.navigator.geolocation.getCurrentPosition(resolve, reject)
+      const options = Platform.OS === 'android' ? {enableHighAccuracy:false, timeout: 10000}
+                      : {enableHighAccuracy:false};
+      global.navigator.geolocation.getCurrentPosition(resolve, reject, options)
     })
   })
 }
