@@ -1,4 +1,4 @@
-# citysafe.me
+# Stray
 
 This is the GitHub repo for Stray!
 
